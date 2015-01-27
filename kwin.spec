@@ -5,7 +5,7 @@
 
 Name:           kwin
 Version:        5.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -117,7 +117,7 @@ developing applications that use %{name}.
 
 %package        doc
 Summary:        User manual for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 BuildArch:      noarch
 %description    doc
 %{summary}.
@@ -206,6 +206,9 @@ fi
 
 
 %changelog
+* Tue Jan 27 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.0-2
+- -doc: Don't require arch-specific kwin in noarch package
+
 * Mon Jan 26 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.0-1
 - Plasma 5.2.0
 
