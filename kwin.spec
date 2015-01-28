@@ -5,7 +5,7 @@
 
 Name:           kwin
 Version:        5.2.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -21,6 +21,9 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 %global stable stable
 %endif
 Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
+
+# Upstream patches
+Patch0:		kwin-kcm-kwindecoration-fix-blackqml-view.patch
 
 # Base
 BuildRequires:  kf5-rpm-macros
@@ -126,6 +129,9 @@ BuildArch:      noarch
 %prep
 %setup -q -n %{name}-%{version}
 
+%patch0 -p1 -b .kcmkwindeco
+
+
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
@@ -206,6 +212,9 @@ fi
 
 
 %changelog
+* Wed Jan 28 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.0-3
+- add upstream patch for bug #341971 - fixes Window decorations KCM
+
 * Tue Jan 27 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.0-2
 - -doc: Don't require arch-specific kwin in noarch package
 
