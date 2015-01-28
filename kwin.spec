@@ -138,7 +138,7 @@ make %{?_smp_mflags} -C %{_target_platform}
 
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
-%find_lang kwin5 --with-qt --all-name
+%find_lang kwin5 --with-qt --with-kde --all-name
 
 
 %post
@@ -204,7 +204,7 @@ fi
 
 %files doc
 %doc COMPLIANCE COPYING COPYING.DOC HACKING README
-%{_datadir}/doc/HTML/en/kcontrol/*
+%{_docdir}/HTML/en_US/*
 
 
 %changelog
