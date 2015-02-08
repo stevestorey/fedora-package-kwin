@@ -6,7 +6,7 @@
 
 Name:           kwin
 Version:        5.2.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -86,6 +86,9 @@ Requires:       qt5-qtmultimedia
 
 # Before kwin was split out from kde-workspace into a subpackage
 Conflicts:      kde-workspace%{?_isa} < 4.11.14-2
+
+Obsoletes:      kwin-gles < 5
+Obsoletes:      kwin-gles-libs < 5
 
 %description
 %{summary}.
@@ -208,6 +211,9 @@ fi
 
 
 %changelog
+* Sun Feb 08 2015 Daniel Vrátil <dvratli@redhat.com> - 5.2.0.1-2
+- Obsoletes: kwin-gles, kwin-gles-libs
+
 * Wed Jan 28 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.0.1-1
 - Update to upstream hotfix release 5.2.0.1 (kwindeco KCM bugfix)
 
