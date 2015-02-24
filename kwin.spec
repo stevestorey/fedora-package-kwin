@@ -5,8 +5,8 @@
 %global         plasma_version  5.2.0
 
 Name:           kwin
-Version:        5.2.0.1
-Release:        2%{?dist}
+Version:        5.2.1
+Release:        1%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -211,6 +211,9 @@ fi
 
 
 %changelog
+* Tue Feb 24 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.1-1
+- Plasma 5.2.1
+
 * Sun Feb 08 2015 Daniel Vrátil <dvratli@redhat.com> - 5.2.0.1-2
 - Obsoletes: kwin-gles, kwin-gles-libs
 
