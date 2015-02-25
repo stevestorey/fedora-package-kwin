@@ -77,6 +77,7 @@ BuildRequires:  kf5-kcmutils-devel
 BuildRequires:  kf5-knewstuff-devel
 BuildRequires:  kf5-kactivities-devel
 BuildRequires:  kf5-kdoctools-devel
+BuildRequires:  kf5-kdeclarative-devel
 
 BuildRequires:  kdecoration-devel
 
