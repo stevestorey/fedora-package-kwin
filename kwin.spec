@@ -208,7 +208,7 @@ fi
 
 %files doc
 %doc COMPLIANCE COPYING COPYING.DOC HACKING README
-%{_docdir}/HTML/en_US/*
+%{_docdir}/HTML/en/*
 
 
 %changelog
