@@ -6,7 +6,7 @@
 
 Name:           kwin
 Version:        5.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -90,6 +90,9 @@ Conflicts:      kde-workspace%{?_isa} < 4.11.14-2
 
 Obsoletes:      kwin-gles < 5
 Obsoletes:      kwin-gles-libs < 5
+
+# http://bugzilla.redhat.com/605675
+Provides: firstboot(windowmanager) = kwin
 
 %description
 %{summary}.
@@ -212,6 +215,9 @@ fi
 
 
 %changelog
+* Fri Feb 27 2015 Rex Dieter <rdieter@fedoraproject.org> 5.2.1-2
+- Provides: firstboot(windowmanager) = kwin  (#605675)
+
 * Tue Feb 24 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.1-1
 - Plasma 5.2.1
 
