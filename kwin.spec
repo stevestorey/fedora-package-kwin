@@ -6,7 +6,7 @@
 
 Name:           kwin
 Version:        5.2.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -221,8 +221,10 @@ fi
 
 
 %changelog
-* Fri Feb 27 2015 Rex Dieter <rdieter@fedoraproject.org> 
-- 5.2.1-3
+* Fri Feb 27 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.1-4
+- Rebuild (GCC 5)
+
+* Fri Feb 27 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.2.1-3
 - Provide /usr/bin/kwin too (#1197135)
 - bump plasma_version macro
 
