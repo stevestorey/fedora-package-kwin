@@ -2,11 +2,11 @@
 # NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
 # which is not available in Fedora yet
 %global         wayland 0
-%global         plasma_version  5.2.0
+%global         plasma_version  5.2.1
 
 Name:           kwin
 Version:        5.2.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -93,6 +93,8 @@ Obsoletes:      kwin-gles-libs < 5
 
 # http://bugzilla.redhat.com/605675
 Provides: firstboot(windowmanager) = kwin_x11
+# and kwin too (#1197135), until initial-setup fixed
+Provides: firstboot(windowmanager) = kwin
 
 %description
 %{summary}.
@@ -147,6 +149,9 @@ make %{?_smp_mflags} -C %{_target_platform}
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 %find_lang kwin5 --with-qt --with-kde --all-name
 
+# temporary(?) hack to allow initial-setup to use /usr/bin/kwin too
+ln -s kwin_x11 %{buildroot}%{_bindir}/kwin
+
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
@@ -161,6 +166,7 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files -f kwin5.lang
+%{_bindir}/kwin
 %{_bindir}/kwin_x11
 %{_datadir}/kwin
 %{_kf5_qtplugindir}/*.so
@@ -215,6 +221,11 @@ fi
 
 
 %changelog
+* Fri Feb 27 2015 Rex Dieter <rdieter@fedoraproject.org> 
+- 5.2.1-3
+- Provide /usr/bin/kwin too (#1197135)
+- bump plasma_version macro
+
 * Fri Feb 27 2015 Rex Dieter <rdieter@fedoraproject.org> 5.2.1-2
 - Provides: firstboot(windowmanager) = kwin_x11  (#605675)
 
