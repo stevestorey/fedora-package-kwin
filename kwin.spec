@@ -57,6 +57,8 @@ BuildRequires:  libwayland-server-devel
 BuildRequires:  libwayland-cursor-devel
 BuildRequires:  mesa-libwayland-egl-devel
 BuildRequires:  libxkbcommon-devel >= 0.4
+BuildRequires:  pkgconfig(libinput) >= 0.10
+BuildRequires:  pkgconfig(libudev)
 %endif
 
 # KF5
