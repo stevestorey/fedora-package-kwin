@@ -2,7 +2,6 @@
 # NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
 # which is not available in Fedora yet
 %global         wayland 0
-%global         plasma_version  5.2.1
 
 Name:           kwin
 Version:        5.2.2
@@ -21,7 +20,7 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 %else
 %global stable stable
 %endif
-Source0:        http://download.kde.org/%{stable}/plasma/%{plasma_version}/%{name}-%{version}.tar.xz
+Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 # Base
 BuildRequires:  kf5-rpm-macros
