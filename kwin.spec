@@ -5,7 +5,7 @@
 
 Name:           kwin
 Version:        5.2.95
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -46,6 +46,7 @@ BuildRequires:  libXcursor-devel
 BuildRequires:  xcb-util-wm-devel
 BuildRequires:  xcb-util-image-devel
 BuildRequires:  xcb-util-keysyms-devel
+BuildRequires:  xcb-util-cursor-devel
 BuildRequires:  libepoxy-devel
 
 # Wayland (optional)
@@ -222,6 +223,9 @@ fi
 
 
 %changelog
+* Sat Apr 25 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.95-2
+- BR xcb-util-cursor-devel
+
 * Wed Apr 22 2015 Daniel Vrátil <dvratil@redhat.com> - 5.2.95-1
 - Plasma 5.2.95
 
