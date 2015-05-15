@@ -1,11 +1,13 @@
 # Whether to build experimental Wayland support
 # NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
 # which is not available in Fedora yet
-%global         wayland 0
+%if 0%{?fedora} > 20
+%global         wayland 1
+%endif
 
 Name:           kwin
 Version:        5.3.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -21,6 +23,10 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 %global stable stable
 %endif
 Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
+
+## upstreamable patches
+# session management, https://git.reviewboard.kde.org/r/123580/
+Patch1: kwin-session_management_review123580.patch
 
 # Base
 BuildRequires:  kf5-rpm-macros
@@ -136,16 +142,17 @@ BuildArch:      noarch
 
 
 %prep
-%setup -q -n %{name}-%{version}
+%autosetup -n %{name}-%{version} -p1
 
 
 %build
-mkdir -p %{_target_platform}
+mkdir %{_target_platform}
 pushd %{_target_platform}
 %{cmake_kf5} ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
+
 
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
@@ -170,6 +177,8 @@ fi
 %files -f kwin5.lang
 %{_bindir}/kwin
 %{_bindir}/kwin_x11
+%{_kf5_libdir}/libkdeinit5_kwin_x11.so
+%{_kf5_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/kwin
 %{_kf5_qtplugindir}/*.so
 %{_kf5_qtplugindir}/kwin
@@ -184,24 +193,22 @@ fi
 %{_kf5_datadir}/kservicetypes5/*.desktop
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
-%{_datadir}/icons/hicolor/*/apps/*
-%config %{_sysconfdir}/xdg/*.knsrc
+%{_datadir}/icons/hicolor/*/apps/kwin.*
+%{_datadir}/dbus-1/interfaces/*.xml
+# note: these are for reference (to express config defaults), they are
+# not config files themselves (so don't use %%config tag)
+%{_sysconfdir}/xdg/*.knsrc
 
 %if 0%{wayland}
 %files wayland
 %{_bindir}/kwin_wayland
+%{_kf5_libdir}/libkdeinit5_kwin_wayland.so
 %endif
-
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
 %files libs
-%{_kf5_libdir}/libkdeinit5_kwin_x11.so
-%if 0%{wayland}
-%{_kf5_libdir}/libkdeinit5_kwin_wayland.so
-%endif
-%{_kf5_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_libdir}/libkwin.so.*
 %{_libdir}/libkwinxrenderutils.so.*
 %{_libdir}/libkwineffects.so.*
@@ -210,19 +217,26 @@ fi
 
 %files devel
 %{_libdir}/cmake/KWinDBusInterface
-%{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/libkwinxrenderutils.so
 %{_libdir}/libkwineffects.so
 %{_libdir}/libkwinglutils.so
 %{_libdir}/libkwin4_effect_builtins.so
-%{_includedir}/*.h
+%{_includedir}/kwin*.h
 
 %files doc
 %doc COMPLIANCE COPYING COPYING.DOC HACKING README
-%{_docdir}/HTML/en/*
+%{_docdir}/HTML/en/kcontrol/
 
 
 %changelog
+* Thu May 14 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.3.0-3
+- test candidate SM fixes (reviewboard#123580,kde#341930)
+- move libkdeinit bits out of -libs
+- move dbus interface xml to runtime pkg
+- drop %%config from knsrc files
+- enable wayland support (f21+)
+- .spec cosmetics
+
 * Wed Apr 29 2015 Jan Grulich <jgrulich@redhat.com> - 5.3.0-2
 - BR xcb-util-cursor-devel
 
