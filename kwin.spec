@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.3.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -27,6 +27,8 @@ Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{ve
 ## upstreamable patches
 # session management, https://git.reviewboard.kde.org/r/123580/
 Patch1: kwin-session_management_review123580.patch
+# followup to add discard support
+Patch2: kwin-sm_discard.patch
 
 # Base
 BuildRequires:  kf5-rpm-macros
@@ -38,7 +40,6 @@ BuildRequires:  qt5-qtscript-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qttools-static
 BuildRequires:  qt5-qtx11extras-devel
-BuildRequires:  qt5-qtmultimedia-devel
 
 # X11/OpenGL
 BuildRequires:  mesa-libGL-devel
@@ -89,8 +90,9 @@ BuildRequires:  kf5-kdeclarative-devel
 
 BuildRequires:  kdecoration-devel
 
-# Runtime deps
+## Runtime deps
 Requires:       kf5-filesystem
+# Runtime-only dependency for effect video playback
 Requires:       qt5-qtmultimedia
 
 # Before kwin was split out from kde-workspace into a subpackage
@@ -229,6 +231,10 @@ fi
 
 
 %changelog
+* Sun May 17 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.3.0-4
+- followup SM fix, discard support (kde#341930)
+- note qt5-qtmultimedia dep is runtime-only
+
 * Thu May 14 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.3.0-3
 - test candidate SM fixes (reviewboard#123580,kde#341930)
 - move libkdeinit bits out of -libs
