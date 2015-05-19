@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.3.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -196,7 +196,6 @@ fi
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
 %{_datadir}/icons/hicolor/*/apps/kwin.*
-%{_datadir}/dbus-1/interfaces/*.xml
 # note: these are for reference (to express config defaults), they are
 # not config files themselves (so don't use %%config tag)
 %{_sysconfdir}/xdg/*.knsrc
@@ -211,6 +210,8 @@ fi
 %postun libs -p /sbin/ldconfig
 
 %files libs
+# these dbus xml files probably ought to be moved to -devel, kde-sig needs agreed policy first -- rex
+%{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/libkwin.so.*
 %{_libdir}/libkwinxrenderutils.so.*
 %{_libdir}/libkwineffects.so.*
@@ -231,6 +232,9 @@ fi
 
 
 %changelog
+* Tue May 19 2015 Rex Dieter <rdieter@fedoraproject.org> 5.3.0-5
+- move dbus xml files to -libs (so present for -devel)
+
 * Sun May 17 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.3.0-4
 - followup SM fix, discard support (kde#341930)
 - note qt5-qtmultimedia dep is runtime-only
