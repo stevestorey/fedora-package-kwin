@@ -6,8 +6,8 @@
 %endif
 
 Name:           kwin
-Version:        5.3.0
-Release:        5%{?dist}
+Version:        5.3.1
+Release:        1%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -232,6 +232,9 @@ fi
 
 
 %changelog
+* Tue May 26 2015 Daniel Vrátil <dvratil@redhat.com> - 5.3.1-1
+- Plasma 5.3.1
+
 * Tue May 19 2015 Rex Dieter <rdieter@fedoraproject.org> 5.3.0-5
 - move dbus xml files to -libs (so present for -devel)
 
