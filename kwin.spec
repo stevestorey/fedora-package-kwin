@@ -1,7 +1,7 @@
 # Whether to build experimental Wayland support
 # NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
 # which is not available in Fedora yet
-%if 0%{?fedora} > 20
+%if 0%{?fedora} > 21
 %global         wayland 1
 %endif
 
@@ -109,7 +109,7 @@ Provides: firstboot(windowmanager) = kwin
 %description
 %{summary}.
 
-%if 0%{wayland}
+%if 0%{?wayland}
 %package        wayland
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -200,7 +200,7 @@ fi
 # not config files themselves (so don't use %%config tag)
 %{_sysconfdir}/xdg/*.knsrc
 
-%if 0%{wayland}
+%if 0%{?wayland}
 %files wayland
 %{_bindir}/kwin_wayland
 %{_kf5_libdir}/libkdeinit5_kwin_wayland.so
