@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.3.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -75,7 +75,7 @@ BuildRequires:  kf5-kcoreaddons-devel
 BuildRequires:  kf5-kcrash-devel
 BuildRequires:  kf5-kglobalaccel-devel
 BuildRequires:  kf5-ki18n-devel
-BuildRequires:  kf5-kinit-devel
+BuildRequires:  kf5-kinit-devel >= 5.10.0-3
 BuildRequires:  kf5-knotifications-devel
 BuildRequires:  kf5-kservice-devel
 BuildRequires:  kf5-plasma-devel
@@ -94,6 +94,8 @@ BuildRequires:  kdecoration-devel
 Requires:       kf5-filesystem
 # Runtime-only dependency for effect video playback
 Requires:       qt5-qtmultimedia
+# libkdeinit5_kwin*
+%{?kf5_kinit_requires}
 
 # Before kwin was split out from kde-workspace into a subpackage
 Conflicts:      kde-workspace%{?_isa} < 4.11.14-2
@@ -113,6 +115,8 @@ Provides: firstboot(windowmanager) = kwin
 %package        wayland
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+# libkdeinit5_kwin*
+%{?kf5_kinit_requires}
 %description    wayland
 %{summary}.
 %endif
