@@ -69,6 +69,7 @@ BuildRequires:  pkgconfig(libudev)
 %endif
 
 # KF5
+BuildRequires:  kf5-kcompletion-devel
 BuildRequires:  kf5-kconfig-devel
 BuildRequires:  kf5-kconfigwidgets-devel
 BuildRequires:  kf5-kcoreaddons-devel
@@ -76,6 +77,7 @@ BuildRequires:  kf5-kcrash-devel
 BuildRequires:  kf5-kglobalaccel-devel
 BuildRequires:  kf5-ki18n-devel
 BuildRequires:  kf5-kinit-devel >= 5.10.0-3
+BuildRequires:  kf5-kio-devel
 BuildRequires:  kf5-knotifications-devel
 BuildRequires:  kf5-kservice-devel
 BuildRequires:  kf5-plasma-devel
@@ -238,7 +240,7 @@ fi
 
 %changelog
 * Wed Jun 17 2015 Rex Dieter <rdieter@fedoraproject.org> 5.3.1-4
-- BR: kf5-kiconthemes-devel
+- BR: kf5-kcompletion-devel kf5-kiconthemes-devel kf5-kio-devel
 
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.3.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
