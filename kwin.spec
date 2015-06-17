@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.3.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -236,6 +236,9 @@ fi
 
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.3.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Tue May 26 2015 Daniel Vrátil <dvratil@redhat.com> - 5.3.1-1
 - Plasma 5.3.1
 
