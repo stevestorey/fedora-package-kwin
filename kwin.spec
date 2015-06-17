@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.3.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -87,6 +87,7 @@ BuildRequires:  kf5-knewstuff-devel
 BuildRequires:  kf5-kactivities-devel
 BuildRequires:  kf5-kdoctools-devel
 BuildRequires:  kf5-kdeclarative-devel
+BuildRequires:  kf5-kiconthemes-devel
 
 BuildRequires:  kdecoration-devel
 
@@ -236,6 +237,9 @@ fi
 
 
 %changelog
+* Wed Jun 17 2015 Rex Dieter <rdieter@fedoraproject.org> 5.3.1-4
+- BR: kf5-kiconthemes-devel
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.3.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
