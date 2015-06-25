@@ -6,8 +6,8 @@
 %endif
 
 Name:           kwin
-Version:        5.3.1
-Release:        4%{?dist}
+Version:        5.3.2
+Release:        1%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -239,6 +239,9 @@ fi
 
 
 %changelog
+* Thu Jun 25 2015 Daniel Vrátil <dvratil@redhat.com> - 5.3.2-1
+- Plasma 5.3.2
+
 * Wed Jun 17 2015 Rex Dieter <rdieter@fedoraproject.org> 5.3.1-4
 - BR: kf5-kcompletion-devel kf5-kiconthemes-devel kf5-kio-devel
 
