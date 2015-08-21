@@ -1,0 +1,16 @@
+diff --git a/spec/plasma-5/kwin/kwin.spec b/spec/plasma-5/kwin/kwin.spec
+index 7991089..ff8631b 100644
+--- a/spec/plasma-5/kwin/kwin.spec
++++ b/spec/plasma-5/kwin/kwin.spec
+@@ -46,6 +46,11 @@ BuildRequires:  libXcursor-devel
+ BuildRequires:  xcb-util-wm-devel
+ BuildRequires:  xcb-util-image-devel
+ BuildRequires:  xcb-util-keysyms-devel
++BuildRequires:  xcb-util-cursor-devel
++BuildRequires:  libinput-devel
++
++# Other
++BuildRequires:  systemd-devel
+ BuildRequires:  libepoxy-devel
+ 
+ # Wayland (optional)

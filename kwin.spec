@@ -6,7 +6,7 @@
 %endif
 
 Name:           kwin
-Version:        5.3.2
+Version:        5.4.0
 Release:        1%{?dist}
 Summary:        KDE Window manager
 
@@ -26,9 +26,7 @@ Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{ve
 
 ## upstreamable patches
 # session management, https://git.reviewboard.kde.org/r/123580/
-Patch1: kwin-session_management_review123580.patch
 # followup to add discard support
-Patch2: kwin-sm_discard.patch
 
 # Base
 BuildRequires:  kf5-rpm-macros
@@ -44,6 +42,7 @@ BuildRequires:  qt5-qtx11extras-devel
 # X11/OpenGL
 BuildRequires:  mesa-libGL-devel
 BuildRequires:  mesa-libEGL-devel
+BuildRequires:  mesa-libgbm-devel
 BuildRequires:  libxkbcommon-devel
 BuildRequires:  libX11-devel
 BuildRequires:  libxcb-devel
@@ -209,8 +208,12 @@ fi
 
 %if 0%{?wayland}
 %files wayland
-%{_bindir}/kwin_wayland
-%{_kf5_libdir}/libkdeinit5_kwin_wayland.so
+%{_kf5_bindir}/kwin_wayland
+%{_kf5_qtplugindir}/org.kde.kglobalaccel5.platforms/KF5GlobalAccelPrivateKWin.so
+%{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandDrmBackend.so
+%{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandFbdevBackend.so
+%{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandWaylandBackend.so
+%{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandX11Backend.so
 %endif
 
 %post libs -p /sbin/ldconfig
@@ -218,6 +221,7 @@ fi
 
 %files libs
 # these dbus xml files probably ought to be moved to -devel, kde-sig needs agreed policy first -- rex
+%{_sysconfdir}/xdg/org_kde_kwin.categories
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/libkwin.so.*
 %{_libdir}/libkwinxrenderutils.so.*
@@ -239,6 +243,12 @@ fi
 
 
 %changelog
+* Fri Aug 21 2015 Daniel Vrátil <dvratil@redhat.com> - 5.4.0-1
+- Plasma 5.4.0
+
+* Thu Aug 13 2015 Daniel Vrátil <dvratil@redhat.com> - 5.3.95-1
+- Plasma 5.3.95
+
 * Thu Jun 25 2015 Daniel Vrátil <dvratil@redhat.com> - 5.3.2-1
 - Plasma 5.3.2
 
