@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -24,9 +24,10 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 %endif
 Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
+## upstream patches
+Patch10:        kwin-5.4.0-delete-the-quit-process-not-useractionsmenu.patch
+
 ## upstreamable patches
-# session management, https://git.reviewboard.kde.org/r/123580/
-# followup to add discard support
 
 # Base
 BuildRequires:  kf5-rpm-macros
@@ -117,6 +118,7 @@ Provides: firstboot(windowmanager) = kwin
 %package        wayland
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       kwayland-integration >= %{version}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 %description    wayland
@@ -243,6 +245,10 @@ fi
 
 
 %changelog
+* Tue Aug 25 2015 Daniel Vrátil <dvratil@redhat.com> - 5.4.0-2
+- add upstream patch to fix crash
+- make sure kwayland-integration is installed for kwin-wayland
+
 * Fri Aug 21 2015 Daniel Vrátil <dvratil@redhat.com> - 5.4.0-1
 - Plasma 5.4.0
 

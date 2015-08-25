@@ -1,0 +1,25 @@
+From: Thomas Lübking <thomas.luebking@gmail.com>
+Date: Sun, 23 Aug 2015 18:56:10 +0000
+Subject: delete the quit process, not UserActinsMenu
+X-Git-Url: http://quickgit.kde.org/?p=kwin.git&a=commitdiff&h=a97b6e0fd6a5eff53e3fccff825998feb4026a34
+---
+delete the quit process, not UserActinsMenu
+
+BUG: 351643
+FIXED-IN: 5.4.1
+REVIEW: 124895
+---
+
+
+--- a/useractions.cpp
++++ b/useractions.cpp
+@@ -314,7 +314,7 @@
+                 p->setArguments(args);
+                 p->setProcessEnvironment(kwinApp()->processStartupEnvironment());
+                 p->setProgram(QStringLiteral("kcmshell5"));
+-                connect(p, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &QProcess::deleteLater);
++                connect(p, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), p, &QProcess::deleteLater);
+                 connect(p, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this,
+                     [p] (QProcess::ProcessError e) {
+                         if (e == QProcess::FailedToStart) {
+
