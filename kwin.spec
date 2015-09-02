@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.4.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -58,7 +58,7 @@ BuildRequires:  libepoxy-devel
 
 # Wayland (optional)
 %if 0%{?wayland}
-BuildRequires:  kf5-kwayland-devel
+BuildRequires:  kf5-kwayland-devel >= %{version}
 BuildRequires:  libwayland-client-devel
 BuildRequires:  libwayland-server-devel
 BuildRequires:  libwayland-cursor-devel
@@ -131,6 +131,10 @@ Requires:       kwayland-integration >= %{version}
 Summary:        KWin runtime libraries
 # Before kwin-libs was split out from kde-workspace into a subpackage
 Conflicts:      kde-workspace-libs%{?_isa} < 4.11.14-2
+%if 0%{?wayland}
+# = or >= ? play safe, go with latter for now -- rex
+Requires:       kf5-kwayland%{?_isa} >= %{version}
+%endif
 %description    libs
 %{summary}.
 
@@ -247,6 +251,9 @@ fi
 
 
 %changelog
+* Wed Sep 02 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-4
+- versioned kf5-kwayland dep too
+
 * Wed Sep 02 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-3
 - add versioned Requires: kwin-libs dep to main pkg
 
