@@ -120,7 +120,7 @@ Provides: firstboot(windowmanager) = kwin
 %package        wayland
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
-Requires:       kwayland-integration >= %{version}
+Requires:       kwayland-integration%{?_isa} >= %{version}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 %description    wayland
@@ -253,6 +253,7 @@ fi
 %changelog
 * Wed Sep 02 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-4
 - versioned kf5-kwayland dep too
+- make kwayland-integration dep arch'd
 
 * Wed Sep 02 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-3
 - add versioned Requires: kwin-libs dep to main pkg
