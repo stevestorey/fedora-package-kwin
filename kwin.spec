@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.4.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -94,6 +94,8 @@ BuildRequires:  kf5-kiconthemes-devel
 BuildRequires:  kdecoration-devel
 
 ## Runtime deps
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
 Requires:       kf5-filesystem
 # Runtime-only dependency for effect video playback
 Requires:       qt5-qtmultimedia
@@ -245,6 +247,9 @@ fi
 
 
 %changelog
+* Wed Sep 02 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-3
+- add versioned Requires: kwin-libs dep to main pkg
+
 * Tue Aug 25 2015 Daniel Vrátil <dvratil@redhat.com> - 5.4.0-2
 - add upstream patch to fix crash
 - make sure kwayland-integration is installed for kwin-wayland
