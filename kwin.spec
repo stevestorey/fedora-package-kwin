@@ -6,8 +6,8 @@
 %endif
 
 Name:           kwin
-Version:        5.4.0
-Release:        4%{?dist}
+Version:        5.4.1
+Release:        1%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -25,7 +25,6 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch10:        kwin-5.4.0-delete-the-quit-process-not-useractionsmenu.patch
 
 ## upstreamable patches
 
@@ -251,6 +250,9 @@ fi
 
 
 %changelog
+* Wed Sep 09 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.4.1-1
+- 5.4.1
+
 * Wed Sep 02 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-4
 - versioned kf5-kwayland dep too
 - make kwayland-integration dep arch'd
