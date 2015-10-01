@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.4.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -227,9 +227,7 @@ fi
 %postun libs -p /sbin/ldconfig
 
 %files libs
-# these dbus xml files probably ought to be moved to -devel, kde-sig needs agreed policy first -- rex
 %{_sysconfdir}/xdg/org_kde_kwin.categories
-%{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/libkwin.so.*
 %{_libdir}/libkwinxrenderutils.so.*
 %{_libdir}/libkwineffects.so.*
@@ -237,6 +235,7 @@ fi
 %{_libdir}/libkwin4_effect_builtins.so.*
 
 %files devel
+%{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/cmake/KWinDBusInterface
 %{_libdir}/libkwinxrenderutils.so
 %{_libdir}/libkwineffects.so
@@ -250,6 +249,9 @@ fi
 
 
 %changelog
+* Thu Oct 01 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.1-2
+- -devel: move dbus xml interface files here
+
 * Wed Sep 09 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.4.1-1
 - 5.4.1
 
