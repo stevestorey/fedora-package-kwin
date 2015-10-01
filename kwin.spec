@@ -7,7 +7,7 @@
 
 Name:           kwin
 Version:        5.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -23,6 +23,8 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 %global stable stable
 %endif
 Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
+
+%global majmin_ver %(echo %{version} | cut -d. -f1,2)
 
 ## upstream patches
 
@@ -90,7 +92,7 @@ BuildRequires:  kf5-kdoctools-devel
 BuildRequires:  kf5-kdeclarative-devel
 BuildRequires:  kf5-kiconthemes-devel
 
-BuildRequires:  kdecoration-devel
+BuildRequires:  kdecoration-devel >= %{majmin_ver}
 
 ## Runtime deps
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -249,6 +251,9 @@ fi
 
 
 %changelog
+* Thu Oct 01 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.1-3
+- tigthen kdecorration-devel dep
+
 * Thu Oct 01 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.1-2
 - -devel: move dbus xml interface files here
 
