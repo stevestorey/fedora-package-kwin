@@ -2,19 +2,19 @@
 # NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
 # which is not available in Fedora yet
 %if 0%{?fedora} > 21
-%global         wayland 1
+%global  wayland 1
 %endif
 
-Name:           kwin
+Name:    kwin
 Version: 5.4.2
-Release: 1%{?dist}
-Summary:        KDE Window manager
+Release: 2%{?dist}
+Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
 # scripts/enforcedeco/contents/code/main.js
 # KDE e.V. may determine that future GPL versions are accepted
-License:        GPLv2 or GPLv3
-URL:            https://projects.kde.org/projects/kde/workspace/kwin
+License: GPLv2 or GPLv3
+URL:     https://projects.kde.org/projects/kde/workspace/kwin
 
 %global revision %(echo %{version} | cut -d. -f3)
 %if %{revision} >= 50
@@ -22,17 +22,19 @@ URL:            https://projects.kde.org/projects/kde/workspace/kwin
 %else
 %global stable stable
 %endif
-Source0:        http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
+Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 %global majmin_ver %(echo %{version} | cut -d. -f1,2)
 
 ## upstream patches
+Patch3: 0003-decorations-Delay-closeWindow-to-next-event-cycle.patch
 
 ## upstreamable patches
 
 # Base
-BuildRequires:  kf5-rpm-macros
+BuildRequires:  cmake
 BuildRequires:  extra-cmake-modules
+BuildRequires:  kf5-rpm-macros
 
 # Qt
 BuildRequires:  qt5-qtbase-devel
@@ -251,6 +253,9 @@ fi
 
 
 %changelog
+* Tue Oct 20 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.2-2
+- .spec cosmetics, backport kwin/aurorae crasher fix (kde#346857)
+
 * Thu Oct 01 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.4.2-1
 - 5.4.2
 
