@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.4.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -28,6 +28,9 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 
 ## upstream patches
 Patch3: 0003-decorations-Delay-closeWindow-to-next-event-cycle.patch
+Patch4: 0004-kcmkwin-deco-Delay-deleting-of-PreviewBridge.patch
+Patch5: 0005-kcmeffects-Do-not-use-root-context-properties.patch
+Patch6: 0006-Improve-virtual-desktop-selection-for-transients.patch
 
 ## upstreamable patches
 
@@ -253,6 +256,9 @@ fi
 
 
 %changelog
+* Fri Oct 23 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.2-3
+- latest batch of upstream fixes (kde#344278,kde#354164,kde#351763,kde#354090)
+
 * Tue Oct 20 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.2-2
 - .spec cosmetics, backport kwin/aurorae crasher fix (kde#346857)
 
