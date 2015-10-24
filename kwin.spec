@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.4.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -256,6 +256,9 @@ fi
 
 
 %changelog
+* Sat Oct 24 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.2-4
+- respin (rawhide)
+
 * Fri Oct 23 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.2-3
 - latest batch of upstream fixes (kde#344278,kde#354164,kde#351763,kde#354090)
 
