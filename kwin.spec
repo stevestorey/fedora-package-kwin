@@ -6,8 +6,8 @@
 %endif
 
 Name:    kwin
-Version: 5.4.2
-Release: 4%{?dist}
+Version: 5.4.3
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -27,10 +27,6 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 %global majmin_ver %(echo %{version} | cut -d. -f1,2)
 
 ## upstream patches
-Patch3: 0003-decorations-Delay-closeWindow-to-next-event-cycle.patch
-Patch4: 0004-kcmkwin-deco-Delay-deleting-of-PreviewBridge.patch
-Patch5: 0005-kcmeffects-Do-not-use-root-context-properties.patch
-Patch6: 0006-Improve-virtual-desktop-selection-for-transients.patch
 
 ## upstreamable patches
 
@@ -256,6 +252,9 @@ fi
 
 
 %changelog
+* Thu Nov 05 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.4.3-1
+- Plasma 5.4.3
+
 * Sat Oct 24 2015 Rex Dieter <rdieter@fedoraproject.org> 5.4.2-4
 - respin (rawhide)
 
