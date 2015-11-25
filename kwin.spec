@@ -93,6 +93,7 @@ BuildRequires:  kf5-kactivities-devel
 BuildRequires:  kf5-kdoctools-devel
 BuildRequires:  kf5-kdeclarative-devel
 BuildRequires:  kf5-kiconthemes-devel
+BuildRequires:  kf5-kidletime-devel
 
 BuildRequires:  kdecoration-devel >= %{majmin_ver}
 BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
