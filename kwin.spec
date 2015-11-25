@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.4.3
+Version: 5.4.95
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -37,6 +37,7 @@ BuildRequires:  kf5-rpm-macros
 
 # Qt
 BuildRequires:  qt5-qtbase-devel
+BuildRequires:  qt5-qtbase-static
 BuildRequires:  qt5-qtscript-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qttools-static
@@ -94,6 +95,7 @@ BuildRequires:  kf5-kdeclarative-devel
 BuildRequires:  kf5-kiconthemes-devel
 
 BuildRequires:  kdecoration-devel >= %{majmin_ver}
+BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
 
 ## Runtime deps
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -219,11 +221,13 @@ fi
 %if 0%{?wayland}
 %files wayland
 %{_kf5_bindir}/kwin_wayland
+%{_kf5_qtplugindir}/platforms/KWinQpaPlugin.so
 %{_kf5_qtplugindir}/org.kde.kglobalaccel5.platforms/KF5GlobalAccelPrivateKWin.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandDrmBackend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandFbdevBackend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandWaylandBackend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandX11Backend.so
+%{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandVirtualBackend.so
 %endif
 
 %post libs -p /sbin/ldconfig
@@ -252,6 +256,9 @@ fi
 
 
 %changelog
+* Wed Nov 25 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.4.95-1
+- Plasma 5.4.95
+
 * Thu Nov 05 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.4.3-1
 - Plasma 5.4.3
 
