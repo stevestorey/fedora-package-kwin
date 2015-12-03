@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.4.95
+Version: 5.5.0
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -100,6 +100,7 @@ BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
 
 ## Runtime deps
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 
 Requires:       kf5-filesystem
 # Runtime-only dependency for effect video playback
@@ -125,12 +126,19 @@ Provides: firstboot(windowmanager) = kwin
 %package        wayland
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kwayland-integration%{?_isa} >= %{version}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 %description    wayland
 %{summary}.
 %endif
+
+%package        common
+Summary:        Common files for KWin X11 and KWin Wayland
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+%description    common
+%{summary}.
 
 %package        libs
 Summary:        KWin runtime libraries
@@ -146,6 +154,7 @@ Requires:       kf5-kwayland%{?_isa} >= %{version}
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kf5-kconfig-devel
 Requires:       kf5-kservice-devel
 Requires:       kf5-kwindowsystem-devel
@@ -195,10 +204,12 @@ fi
 %posttrans
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
-%files -f kwin5.lang
+%files
 %{_bindir}/kwin
 %{_bindir}/kwin_x11
 %{_kf5_libdir}/libkdeinit5_kwin_x11.so
+
+%files common -f kwin5.lang
 %{_kf5_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/kwin
 %{_kf5_qtplugindir}/*.so
@@ -258,6 +269,9 @@ fi
 
 
 %changelog
+* Thu Dec 03 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.0-1
+- Plasma 5.5.0
+
 * Wed Nov 25 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.4.95-1
 - Plasma 5.4.95
 
