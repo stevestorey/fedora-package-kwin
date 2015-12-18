@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.5.0
+Version: 5.5.1
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -269,6 +269,9 @@ fi
 
 
 %changelog
+* Fri Dec 18 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.1-1
+- Plasma 5.5.1
+
 * Thu Dec 03 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.0-1
 - Plasma 5.5.0
 
