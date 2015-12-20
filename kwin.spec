@@ -27,6 +27,7 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 %global majmin_ver %(echo %{version} | cut -d. -f1,2)
 
 ## upstream patches
+Patch1: 0001-Fix-build-with-Qt-5.6.patch
 
 ## upstreamable patches
 

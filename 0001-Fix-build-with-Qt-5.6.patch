@@ -1,0 +1,38 @@
+From 05c542ad602a114751f34ac9d03597f11e95470f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jan=20Kundr=C3=A1t?= <jkt@flaska.net>
+Date: Thu, 3 Dec 2015 18:24:01 +0100
+Subject: [PATCH] Fix build with Qt 5.6
+
+A recent change [1] led to Qt5PlatformSupport.pc not being installed
+anymore. Pkg-config was only used for finding the paths, and the actual
+include flags and library names were hardcoded in KWin's
+FindQt5PlatformSupport.cmake anyway, so let's just focus on finding
+Qt5Gui, the module which provides this Qt5PlatformSupport library, and
+work from there.
+
+Thanks to Hrvoje Senjan (shumski) for pointing me towards the upstream
+Gerrit change.
+
+[1] https://codereview.qt-project.org/140954/
+
+REVIEW: 126234
+---
+ cmake/modules/FindQt5PlatformSupport.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/modules/FindQt5PlatformSupport.cmake b/cmake/modules/FindQt5PlatformSupport.cmake
+index 90a8438..da6a1c1 100644
+--- a/cmake/modules/FindQt5PlatformSupport.cmake
++++ b/cmake/modules/FindQt5PlatformSupport.cmake
+@@ -67,7 +67,7 @@ endif()
+ # Use pkg-config to get the directories and then use these values
+ # in the FIND_PATH() and FIND_LIBRARY() calls
+ find_package(PkgConfig)
+-pkg_check_modules(PKG_Qt5PlatformSupport QUIET Qt5PlatformSupport)
++pkg_check_modules(PKG_Qt5PlatformSupport QUIET Qt5Gui)
+ 
+ set(Qt5PlatformSupport_DEFINITIONS ${PKG_Qt5PlatformSupport_CFLAGS_OTHER})
+ set(Qt5PlatformSupport_VERSION ${PKG_Qt5PlatformSupport_VERSION})
+-- 
+2.5.0
+
