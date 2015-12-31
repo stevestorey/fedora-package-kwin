@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.5.1
+Version: 5.5.2
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -27,7 +27,6 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 %global majmin_ver %(echo %{version} | cut -d. -f1,2)
 
 ## upstream patches
-Patch1: 0001-Fix-build-with-Qt-5.6.patch
 
 ## upstreamable patches
 
@@ -270,6 +269,9 @@ fi
 
 
 %changelog
+* Thu Dec 31 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.5.2-1
+- 5.5.2
+
 * Fri Dec 18 2015 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.1-1
 - Plasma 5.5.1
 
