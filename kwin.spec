@@ -7,14 +7,14 @@
 
 Name:    kwin
 Version: 5.5.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
 # scripts/enforcedeco/contents/code/main.js
 # KDE e.V. may determine that future GPL versions are accepted
 License: GPLv2 or GPLv3
-URL:     https://projects.kde.org/projects/kde/workspace/kwin
+URL:     https://projects.kde.org/kwin
 
 %global revision %(echo %{version} | cut -d. -f3)
 %if %{revision} >= 50
@@ -61,7 +61,7 @@ BuildRequires:  libepoxy-devel
 
 # Wayland (optional)
 %if 0%{?wayland}
-BuildRequires:  kf5-kwayland-devel >= %{version}
+BuildRequires:  kf5-kwayland-devel >= %{majmin_ver}
 BuildRequires:  libwayland-client-devel
 BuildRequires:  libwayland-server-devel
 BuildRequires:  libwayland-cursor-devel
@@ -145,8 +145,7 @@ Summary:        KWin runtime libraries
 # Before kwin-libs was split out from kde-workspace into a subpackage
 Conflicts:      kde-workspace-libs%{?_isa} < 4.11.14-2
 %if 0%{?wayland}
-# = or >= ? play safe, go with latter for now -- rex
-Requires:       kf5-kwayland%{?_isa} >= %{version}
+Requires:       kf5-kwayland%{?_isa} >= %{majmin_ver}
 %endif
 %description    libs
 %{summary}.
@@ -269,6 +268,9 @@ fi
 
 
 %changelog
+* Thu Dec 31 2015 Rex Dieter <rdieter@fedoraproject.org> 5.5.2-2
+- update URL, use %%majmin_ver for more plasma-related deps
+
 * Thu Dec 31 2015 Rex Dieter <rdieter@fedoraproject.org> - 5.5.2-1
 - 5.5.2
 
