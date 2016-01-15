@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.5.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -31,7 +31,6 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 ## upstreamable patches
 
 # Base
-BuildRequires:  cmake
 BuildRequires:  extra-cmake-modules
 BuildRequires:  kf5-rpm-macros
 
@@ -263,11 +262,15 @@ fi
 %{_includedir}/kwin*.h
 
 %files doc
-%doc COMPLIANCE COPYING COPYING.DOC HACKING README
+%doc COMPLIANCE HACKING README
+%license COPYING COPYING.DOC
 %{_docdir}/HTML/en/kcontrol/
 
 
 %changelog
+* Thu Jan 14 2016 Rex Dieter <rdieter@fedoraproject.org> 5.5.3-2
+- -BR: cmake, use %%license
+
 * Thu Jan 07 2016 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.3-1
 - Plasma 5.5.3
 
