@@ -6,8 +6,8 @@
 %endif
 
 Name:    kwin
-Version: 5.5.3
-Release: 2%{?dist}
+Version: 5.5.4
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -268,6 +268,9 @@ fi
 
 
 %changelog
+* Wed Jan 27 2016 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.4-1
+- Plasma 5.5.4
+
 * Thu Jan 14 2016 Rex Dieter <rdieter@fedoraproject.org> 5.5.3-2
 - -BR: cmake, use %%license
 
