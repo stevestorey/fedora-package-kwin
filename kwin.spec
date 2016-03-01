@@ -6,8 +6,8 @@
 %endif
 
 Name:    kwin
-Version: 5.5.4
-Release: 2%{?dist}
+Version: 5.5.5
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -268,6 +268,9 @@ fi
 
 
 %changelog
+* Tue Mar 01 2016 Daniel Vrátil <dvratil@fedoraproject.org> - 5.5.5-1
+- Plasma 5.5.5
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 5.5.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
