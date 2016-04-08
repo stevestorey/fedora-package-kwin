@@ -14,7 +14,7 @@ Summary: KDE Window manager
 # scripts/enforcedeco/contents/code/main.js
 # KDE e.V. may determine that future GPL versions are accepted
 License: GPLv2 or GPLv3
-URL:     https://projects.kde.org/kwin
+URL:     https://quickgit.kde.org/?p=%{name}.git
 
 %global revision %(echo %{version} | cut -d. -f3)
 %if %{revision} >= 50
