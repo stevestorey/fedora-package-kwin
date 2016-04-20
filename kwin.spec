@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.6.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -100,6 +100,8 @@ BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
 ## Runtime deps
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
+Requires:       kdecoration%{?_isa} >= %{majmin_ver}
+Requires:       kscreenlocker%{?_isa} >= %{majmin_ver}
 
 Requires:       kf5-filesystem
 # Runtime-only dependency for effect video playback
@@ -126,7 +128,7 @@ Provides: firstboot(windowmanager) = kwin
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
-Requires:       kwayland-integration%{?_isa} >= %{version}
+Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 %description    wayland
@@ -268,6 +270,10 @@ fi
 
 
 %changelog
+* Wed Apr 20 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.6.3-2
+- tighten kscreenlocker, kdecoration runtime deps (#1328942)
+- -wayland: relax kwayland-integration runtime dep
+
 * Tue Apr 19 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.6.3-1
 - 5.6.3
 
