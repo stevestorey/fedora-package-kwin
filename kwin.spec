@@ -6,8 +6,8 @@
 %endif
 
 Name:    kwin
-Version: 5.6.3
-Release: 2%{?dist}
+Version: 5.6.4
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -270,6 +270,9 @@ fi
 
 
 %changelog
+* Sat May 14 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.6.4-1
+- 5.6.4
+
 * Wed Apr 20 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.6.3-2
 - tighten kscreenlocker, kdecoration runtime deps (#1328942)
 - -wayland: relax kwayland-integration runtime dep
