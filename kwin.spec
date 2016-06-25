@@ -210,8 +210,9 @@ fi
 %{_kf5_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/kwin
 %{_kf5_qtplugindir}/*.so
-%{_kf5_qtplugindir}/kwin
+%{_kf5_qtplugindir}/kwin/
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
+%{_kf5_qtplugindir}/org.kde.kwin.platforms/
 %{_qt5_prefix}/qml/org/kde/kwin
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libexecdir}/kwin_killer_helper
