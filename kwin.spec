@@ -60,7 +60,7 @@ BuildRequires:  libepoxy-devel
 
 # Wayland (optional)
 %if 0%{?wayland}
-BuildRequires:  kf5-kwayland-devel >= %{majmin_ver}
+BuildRequires:  kf5-kwayland-devel
 BuildRequires:  libwayland-client-devel
 BuildRequires:  libwayland-server-devel
 BuildRequires:  libwayland-cursor-devel
@@ -145,9 +145,6 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Summary:        KWin runtime libraries
 # Before kwin-libs was split out from kde-workspace into a subpackage
 Conflicts:      kde-workspace-libs%{?_isa} < 4.11.14-2
-%if 0%{?wayland}
-Requires:       kf5-kwayland%{?_isa} >= %{majmin_ver}
-%endif
 %description    libs
 %{summary}.
 
