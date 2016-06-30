@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.6.95
+Version: 5.7.0
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -268,6 +268,9 @@ fi
 
 
 %changelog
+* Thu Jun 30 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.0-1
+- 5.7.0
+
 * Sat Jun 25 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.6.95-1
 - 5.6.95
 
