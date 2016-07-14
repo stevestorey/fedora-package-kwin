@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.7.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -129,6 +129,9 @@ Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
+# KWinQpaPlugin
+BuildRequires: qt5-qtbase-private-devel
+%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 %description    wayland
@@ -268,6 +271,9 @@ fi
 
 
 %changelog
+* Thu Jul 14 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-2
+- -wayland: KWinQpaPlugin uses private Qt5 apis, BR: qt5-qtbase-private-devel
+
 * Tue Jul 12 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-1
 - 5.7.1
 
