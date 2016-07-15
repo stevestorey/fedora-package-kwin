@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.7.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -37,6 +37,8 @@ BuildRequires:  kf5-rpm-macros
 # Qt
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtbase-static
+# KWinQpaPlugin (and others?)
+BuildRequires:  qt5-qtbase-private-devel
 BuildRequires:  qt5-qtscript-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qttools-static
@@ -104,6 +106,8 @@ Requires:       kdecoration%{?_isa} >= %{majmin_ver}
 Requires:       kscreenlocker%{?_isa} >= %{majmin_ver}
 
 Requires:       kf5-filesystem
+# paranoia, mostly harmless since -wayland already has it
+%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # Runtime-only dependency for effect video playback
 Requires:       qt5-qtmultimedia
 # libkdeinit5_kwin*
@@ -130,8 +134,7 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
 Requires:       xorg-x11-server-Xwayland
-# KWinQpaPlugin
-BuildRequires: qt5-qtbase-private-devel
+# KWinQpaPlugin (and others?)
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
@@ -272,6 +275,9 @@ fi
 
 
 %changelog
+* Fri Jul 15 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-4
+- add versioned qt5 dep in main pkg too
+
 * Thu Jul 14 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-3
 - -wayland: Requires: xorg-x11-server-Xwayland
 
