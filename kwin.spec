@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.7.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -275,6 +275,9 @@ fi
 
 
 %changelog
+* Tue Jul 19 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-5
+- rebuild (qt5)
+
 * Fri Jul 15 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-4
 - add versioned qt5 dep in main pkg too
 
