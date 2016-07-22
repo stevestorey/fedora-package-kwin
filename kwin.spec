@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.7.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -98,6 +98,7 @@ BuildRequires:  kf5-kidletime-devel
 
 BuildRequires:  kdecoration-devel >= %{majmin_ver}
 BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
+BuildRequires:  plasma-breeze-devel >= %{majmin_ver}
 
 ## Runtime deps
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -275,6 +276,9 @@ fi
 
 
 %changelog
+* Fri Jul 22 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.2-2
+- BR: plasma-breeze-devel
+
 * Tue Jul 19 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.2-1
 - 5.7.2
 
