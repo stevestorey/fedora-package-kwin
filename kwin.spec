@@ -6,8 +6,8 @@
 %endif
 
 Name:    kwin
-Version: 5.7.2
-Release: 2%{?dist}
+Version: 5.7.3
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -276,6 +276,9 @@ fi
 
 
 %changelog
+* Tue Aug 02 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.3-1
+- 5.7.3
+
 * Fri Jul 22 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.2-2
 - BR: plasma-breeze-devel
 
