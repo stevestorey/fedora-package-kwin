@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.7.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -179,6 +179,10 @@ BuildArch:      noarch
 %prep
 %autosetup -n %{name}-%{version} -p1
 
+sed -i \
+  -e 's|^find_package(Breeze ${PROJECT_VERSION} CONFIG)|find_package(Breeze 5.7 CONFIG)|' \
+  CMakeLists.txt
+
 
 %build
 mkdir %{_target_platform}
@@ -276,6 +280,9 @@ fi
 
 
 %changelog
+* Tue Aug 02 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.3-2
+- patch-n-relax breeze verision
+
 * Tue Aug 02 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.3-1
 - 5.7.3
 
