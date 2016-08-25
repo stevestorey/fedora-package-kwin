@@ -50,6 +50,7 @@ BuildRequires:  mesa-libEGL-devel
 BuildRequires:  mesa-libgbm-devel
 BuildRequires:  libxkbcommon-devel
 BuildRequires:  libX11-devel
+BuildRequires:  libXi-devel
 BuildRequires:  libxcb-devel
 BuildRequires:  libICE-devel
 BuildRequires:  libSM-devel
