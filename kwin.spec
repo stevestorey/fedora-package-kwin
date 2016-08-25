@@ -110,6 +110,9 @@ Requires:       kf5-filesystem
 # paranoia, mostly harmless since -wayland already has it
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # Runtime-only dependency for effect video playback
+%if ! 0%{?bootstrap}
+BuildRequires:  qt5-qtmultimedia-devel
+%endif
 Requires:       qt5-qtmultimedia
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
@@ -134,6 +137,9 @@ Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
+%if ! 0%{?bootstrap}
+BuildRequires:  xorg-x11-server-Xwayland
+%endif
 Requires:       xorg-x11-server-Xwayland
 # KWinQpaPlugin (and others?)
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
