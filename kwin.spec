@@ -232,6 +232,7 @@ fi
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libexecdir}/kwin_killer_helper
 %{_libexecdir}/kwin_rules_dialog
+%{_libexecdir}/org_kde_kwin_xclipboard_syncer
 %{_datadir}/kwincompositing
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
