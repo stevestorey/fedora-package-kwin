@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.7.5
+Version: 5.7.95
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -18,17 +18,13 @@ URL:     https://quickgit.kde.org/?p=%{name}.git
 
 %global revision %(echo %{version} | cut -d. -f3)
 %if %{revision} >= 50
+%global majmin_ver %(echo %{version} | cut -d. -f1,2).50
 %global stable unstable
 %else
+%global majmin_ver %(echo %{version} | cut -d. -f1,2)
 %global stable stable
 %endif
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
-
-%global majmin_ver %(echo %{version} | cut -d. -f1,2)
-
-## upstream patches
-
-## upstreamable patches
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -287,6 +283,9 @@ fi
 
 
 %changelog
+* Thu Sep 22 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.95-1
+- 5.7.95
+
 * Tue Sep 13 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.5-1
 - 5.7.5
 
