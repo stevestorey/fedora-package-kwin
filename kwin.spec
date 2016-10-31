@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.8.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -25,6 +25,17 @@ URL:     https://quickgit.kde.org/?p=%{name}.git
 %global stable stable
 %endif
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
+
+## upstream patches (using lookaside cache)
+Patch3: 0003-platformx-x11-Add-a-freeze-protection-against-OpenGL.patch
+Patch4: 0004-plugins-qpa-Properly-clean-up-the-created-KWayland-C.patch
+Patch5: 0005-autotests-Add-test-case-for-translucency-effect-of-d.patch
+Patch6: 0006-Trigger-resize-of-input-window-when-deco-size-change.patch
+Patch7: 0007-Ensure-the-complete-decoration-texture-gets-repainte.patch
+Patch8: 0008-effects-translucency-Cancel-existing-animations-befo.patch
+Patch9: 0009-decorations-aurorae-Fix-typo-in-Plastik-theme.patch
+Patch10: 0010-Support-for-KWin.registerShortcut-in-declarative-scr.patch
+Patch15: 0015-Send-a-pointer-leave-when-triggering-a-move-resize.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -284,6 +295,9 @@ fi
 
 
 %changelog
+* Mon Oct 31 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.8.2-2
+- pull in upstream fixes
+
 * Tue Oct 18 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.8.2-1
 - 5.8.2
 
