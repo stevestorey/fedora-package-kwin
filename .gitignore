@@ -1,10 +1,1 @@
-/kwin-5.8.2.tar.xz
-/0003-platformx-x11-Add-a-freeze-protection-against-OpenGL.patch
-/0004-plugins-qpa-Properly-clean-up-the-created-KWayland-C.patch
-/0005-autotests-Add-test-case-for-translucency-effect-of-d.patch
-/0006-Trigger-resize-of-input-window-when-deco-size-change.patch
-/0007-Ensure-the-complete-decoration-texture-gets-repainte.patch
-/0008-effects-translucency-Cancel-existing-animations-befo.patch
-/0009-decorations-aurorae-Fix-typo-in-Plastik-theme.patch
-/0010-Support-for-KWin.registerShortcut-in-declarative-scr.patch
-/0015-Send-a-pointer-leave-when-triggering-a-move-resize.patch
+/kwin-5.8.3.tar.xz

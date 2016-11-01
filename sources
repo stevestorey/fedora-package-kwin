@@ -1,10 +1,1 @@
-89ecc1467e30c14b2c5faab8179fca9d  kwin-5.8.2.tar.xz
-b2b95955a885c8da66ab561166d04214  0003-platformx-x11-Add-a-freeze-protection-against-OpenGL.patch
-1db2e56794aa624ece36ea75919e5449  0004-plugins-qpa-Properly-clean-up-the-created-KWayland-C.patch
-79119252675b97bce9e16ff6d50641de  0005-autotests-Add-test-case-for-translucency-effect-of-d.patch
-05b51a7a6dceb23c69d189272ce2fd61  0006-Trigger-resize-of-input-window-when-deco-size-change.patch
-206cc2d209d3c1838b6c6b9ef00783a9  0007-Ensure-the-complete-decoration-texture-gets-repainte.patch
-a91fad93621d1367a5333fcdc85b9937  0008-effects-translucency-Cancel-existing-animations-befo.patch
-48a93d9574185fe1cfc3f0d3d7495a5d  0009-decorations-aurorae-Fix-typo-in-Plastik-theme.patch
-8157b3fcaa992593ac1acc916092d540  0010-Support-for-KWin.registerShortcut-in-declarative-scr.patch
-e8507fa8891b0651d641622bda405edb  0015-Send-a-pointer-leave-when-triggering-a-move-resize.patch
+4ca4c034bdc8b061224fba1dc5cbebb8  kwin-5.8.3.tar.xz
