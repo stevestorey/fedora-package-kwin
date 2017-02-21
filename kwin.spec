@@ -6,8 +6,8 @@
 %endif
 
 Name:    kwin
-Version: 5.8.5
-Release: 2%{?dist}
+Version: 5.8.6
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -287,6 +287,9 @@ fi
 
 
 %changelog
+* Tue Feb 21 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.8.6-1
+- 5.8.6
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.8.5-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
