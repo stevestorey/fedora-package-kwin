@@ -6,7 +6,7 @@
 %endif
 
 Name:    kwin
-Version: 5.8.6
+Version: 5.9.3
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -231,6 +231,7 @@ fi
 %{_kf5_qtplugindir}/kwin/
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
 %{_kf5_qtplugindir}/org.kde.kwin.platforms/
+%{_kf5_qtplugindir}/kpackage/packagestructure/kwin_packagestructure*.so
 %{_qt5_prefix}/qml/org/kde/kwin
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libexecdir}/kwin_killer_helper
@@ -287,6 +288,9 @@ fi
 
 
 %changelog
+* Wed Mar 01 2017 Jan Grulich <jgrulich@redhat.com> - 5.9.3-1
+- 5.9.3
+
 * Tue Feb 21 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.8.6-1
 - 5.8.6
 
