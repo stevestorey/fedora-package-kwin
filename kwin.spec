@@ -7,14 +7,14 @@
 
 Name:    kwin
 Version: 5.9.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
 # scripts/enforcedeco/contents/code/main.js
 # KDE e.V. may determine that future GPL versions are accepted
 License: GPLv2 or GPLv3
-URL:     https://quickgit.kde.org/?p=%{name}.git
+URL:     https://cgit.kde.org/%{name}.git
 
 %global revision %(echo %{version} | cut -d. -f3)
 %if %{revision} >= 50
@@ -288,6 +288,9 @@ fi
 
 
 %changelog
+* Fri Mar 31 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.4-2
+- rebuild (qt5), update URL
+
 * Thu Mar 23 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.4-1
 - 5.9.4
 
