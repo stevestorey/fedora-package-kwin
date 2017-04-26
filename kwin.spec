@@ -7,7 +7,7 @@
 
 Name:    kwin
 Version: 5.9.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -201,7 +201,10 @@ make %{?_smp_mflags} -C %{_target_platform}
 
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
-%find_lang kwin5 --with-qt --with-kde --all-name
+
+%find_lang %{name} --with-html --with-qt --all-name
+grep "%{_kf5_docdir}" %{name}.lang > %{name}-doc.lang
+cat %{name}.lang %{name}-doc.lang | sort | uniq -u > kwin5.lang
 
 # temporary(?) hack to allow initial-setup to use /usr/bin/kwin too
 ln -s kwin_x11 %{buildroot}%{_bindir}/kwin
@@ -281,13 +284,15 @@ fi
 %{_libdir}/libkwin4_effect_builtins.so
 %{_includedir}/kwin*.h
 
-%files doc
+%files doc -f %{name}-doc.lang
 %doc COMPLIANCE HACKING README
-%license COPYING COPYING.DOC
-%{_docdir}/HTML/en/kcontrol/
+%license COPYING*
 
 
 %changelog
+* Wed Apr 26 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.5-2
+- -doc: use %%find_lang --with-html
+
 * Wed Apr 26 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.5-1
 - 5.9.5
 
