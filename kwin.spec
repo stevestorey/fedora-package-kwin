@@ -1,20 +1,30 @@
+# uncomment to enable bootstrap mode
+#global bootstrap 1
+
+%if !0%{?bootstrap}
+# avoid slow arm arch for now
+%ifnarch %{arm}
+%global tests 1
+%endif
 # Whether to build experimental Wayland support
 # NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
 # which is not available in Fedora yet
 %if 0%{?fedora} > 21
 %global  wayland 1
 %endif
+%endif
 
 Name:    kwin
 Version: 5.10.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
 # scripts/enforcedeco/contents/code/main.js
 # KDE e.V. may determine that future GPL versions are accepted
 License: GPLv2 or GPLv3
-URL:     https://cgit.kde.org/%{name}.git
+URL:     https://userbase.kde.org/KWin
+#URL:    https://cgit.kde.org/%{name}.git
 
 %global revision %(echo %{version} | cut -d. -f3)
 %if %{revision} >= 50
@@ -100,6 +110,12 @@ BuildRequires:  kdecoration-devel >= %{majmin_ver}
 BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
 BuildRequires:  plasma-breeze-devel >= %{majmin_ver}
 
+%if 0%{?tests}
+BuildRequires: dbus-x11
+BuildRequires: openbox
+BuildRequires: xorg-x11-server-Xvfb
+%endif
+
 ## Runtime deps
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
@@ -113,7 +129,7 @@ Requires:       kf5-filesystem
 %if ! 0%{?bootstrap}
 BuildRequires:  qt5-qtmultimedia-devel
 %endif
-Requires:       qt5-qtmultimedia
+Requires:       qt5-qtmultimedia%{?_isa}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 
@@ -193,7 +209,8 @@ sed -i \
 %build
 mkdir %{_target_platform}
 pushd %{_target_platform}
-%{cmake_kf5} ..
+%{cmake_kf5} .. \
+  -DBUILD_TESTING:BOOL=%{?tests:ON}%{!?tests:OFF}
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -208,6 +225,16 @@ cat %{name}.lang %{name}-doc.lang | sort | uniq -u > kwin5.lang
 
 # temporary(?) hack to allow initial-setup to use /usr/bin/kwin too
 ln -s kwin_x11 %{buildroot}%{_bindir}/kwin
+
+
+%check
+%if 0%{?tests}
+# using low timeout to avoid extending buildtimes too much for now -- rex
+export CTEST_OUTPUT_ON_FAILURE=1
+xvfb-run -a \
+dbus-launch --exit-with-session \
+make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
+%endif
 
 
 %post
@@ -290,6 +317,9 @@ fi
 
 
 %changelog
+* Sun Jul 02 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.10.3-2
+- enable tests, support %%bootstrap, update URL
+
 * Tue Jun 27 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.10.3-1
 - 5.10.3
 
