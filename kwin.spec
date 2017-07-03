@@ -15,8 +15,8 @@
 %endif
 
 Name:    kwin
-Version: 5.10.3
-Release: 3%{?dist}
+Version: 5.10.3.1
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -202,7 +202,7 @@ BuildArch:      noarch
 %autosetup -n %{name}-%{version} -p1
 
 sed -i \
-  -e 's|^find_package(Breeze ${PROJECT_VERSION} CONFIG)|find_package(Breeze 5.7 CONFIG)|' \
+  -e 's|^find_package(Breeze ${PROJECT_VERSION} CONFIG)|find_package(Breeze 5.9 CONFIG)|' \
   CMakeLists.txt
 
 
@@ -317,6 +317,9 @@ fi
 
 
 %changelog
+* Mon Jul 03 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.10.3.1-1
+- kwin-5.10.3.1
+
 * Mon Jul 03 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.10.3-3
 - respin
 
