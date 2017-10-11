@@ -16,7 +16,7 @@
 
 Name:    kwin
 Version: 5.10.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -122,9 +122,6 @@ Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kdecoration%{?_isa} >= %{majmin_ver}
 Requires:       kscreenlocker%{?_isa} >= %{majmin_ver}
 
-Requires:       kf5-filesystem
-# paranoia, mostly harmless since -wayland already has it
-%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # Runtime-only dependency for effect video playback
 %if ! 0%{?bootstrap}
 BuildRequires:  qt5-qtmultimedia-devel
@@ -317,6 +314,9 @@ fi
 
 
 %changelog
+* Wed Oct 11 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.10.5-3
+- confirmed only -wayland uses private api
+
 * Tue Oct 10 2017 Jan Grulich <jgrulich@redhat.com> - 5.10.5-2
 - rebuild (qt5)
 
