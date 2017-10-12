@@ -15,8 +15,8 @@
 %endif
 
 Name:    kwin
-Version: 5.10.5
-Release: 3%{?dist}
+Version: 5.11.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -259,8 +259,10 @@ fi
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
 %{_kf5_qtplugindir}/org.kde.kwin.platforms/
 %{_kf5_qtplugindir}/kpackage/packagestructure/kwin_packagestructure*.so
+%{_kf5_qtplugindir}/org.kde.kwin.scenes/*.so
 %{_qt5_prefix}/qml/org/kde/kwin
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
+%{_libexecdir}/kwin_killer_helper
 %{_libexecdir}/kwin_killer_helper
 %{_libexecdir}/kwin_rules_dialog
 %{_libexecdir}/org_kde_kwin_xclipboard_syncer
@@ -314,6 +316,9 @@ fi
 
 
 %changelog
+* Wed Oct 11 2017 Martin Kyral <martin.kyral@gmail.com> - 5.11.0-1
+- 5.11.0
+
 * Wed Oct 11 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.10.5-3
 - confirmed only -wayland uses private api
 
