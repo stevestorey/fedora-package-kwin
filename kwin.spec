@@ -15,7 +15,7 @@
 %endif
 
 Name:    kwin
-Version: 5.11.2
+Version: 5.11.3
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -316,6 +316,9 @@ fi
 
 
 %changelog
+* Wed Nov 08 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.11.3-1
+- 5.11.3
+
 * Wed Oct 25 2017 Martin Kyral <martin.kyral@gmail.com> - 5.11.2-1
 - 5.11.2
 
