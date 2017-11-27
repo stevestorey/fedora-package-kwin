@@ -16,7 +16,7 @@
 
 Name:    kwin
 Version: 5.11.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -316,6 +316,9 @@ fi
 
 
 %changelog
+* Mon Nov 27 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.11.3-2
+- rebuild (qt5)
+
 * Wed Nov 08 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.11.3-1
 - 5.11.3
 
