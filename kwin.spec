@@ -16,7 +16,7 @@
 
 Name:    kwin
 Version: 5.11.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -316,6 +316,9 @@ fi
 
 
 %changelog
+* Wed Dec 20 2017 Jan Grulich <jgrulich@redhat.com> - 5.11.4-2
+- rebuild (qt5)
+
 * Thu Nov 30 2017 Martin Kyral <martin.kyral@gmail.com> - 5.11.4-1
 - 5.11.4
 
