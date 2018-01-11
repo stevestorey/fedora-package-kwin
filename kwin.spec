@@ -16,7 +16,7 @@
 
 Name:    kwin
 Version: 5.11.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -234,18 +234,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %endif
 
 
-%post
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
 %files
 %{_bindir}/kwin
 %{_bindir}/kwin_x11
@@ -316,6 +304,9 @@ fi
 
 
 %changelog
+* Thu Jan 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5.11.5-2
+- Remove obsolete scriptlets
+
 * Tue Jan 02 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.11.5-1
 - 5.11.5
 
