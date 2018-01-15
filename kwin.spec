@@ -15,8 +15,8 @@
 %endif
 
 Name:    kwin
-Version: 5.11.5
-Release: 2%{?dist}
+Version: 5.11.95
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -47,6 +47,7 @@ BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtbase-static
 # KWinQpaPlugin (and others?)
 BuildRequires:  qt5-qtbase-private-devel
+BuildRequires:  qt5-qtsensors-devel
 BuildRequires:  qt5-qtscript-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qttools-static
@@ -234,6 +235,18 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %endif
 
 
+%post
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+
+%postun
+if [ $1 -eq 0 ] ; then
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+%posttrans
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+
 %files
 %{_bindir}/kwin
 %{_bindir}/kwin_x11
@@ -251,7 +264,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_qt5_prefix}/qml/org/kde/kwin
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libexecdir}/kwin_killer_helper
-%{_libexecdir}/kwin_killer_helper
 %{_libexecdir}/kwin_rules_dialog
 %{_libexecdir}/org_kde_kwin_xclipboard_syncer
 %{_datadir}/kwincompositing
@@ -260,6 +272,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_datadir}/kservicetypes5/*.desktop
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
+%{_kf5_datadir}/config.kcfg/kwin_colorcorrect.kcfg
 %{_datadir}/icons/hicolor/*/apps/kwin.*
 # note: these are for reference (to express config defaults), they are
 # not config files themselves (so don't use %%config tag)
@@ -304,8 +317,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
-* Thu Jan 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5.11.5-2
-- Remove obsolete scriptlets
+* Mon Jan 15 2018 Jan Grulich <jgrulich@redhat.com> - 5.11.95-1
+- 5.11.95
 
 * Tue Jan 02 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.11.5-1
 - 5.11.5
