@@ -15,8 +15,8 @@
 %endif
 
 Name:    kwin
-Version: 5.11.95
-Release: 2%{?dist}
+Version: 5.12.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -304,6 +304,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Feb 02 2018 Jan Grulich <jgrulich@redhat.com> - 5.12.0-1
+- 5.12.0
+
 * Thu Jan 18 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5.11.95-2
 - Remove obsolete scriptlets
 
