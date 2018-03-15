@@ -6,17 +6,11 @@
 %ifnarch %{arm}
 %global tests 1
 %endif
-# Whether to build experimental Wayland support
-# NOTE: Does not build on F20 due to too old Wayland and requires kf5-kwayland,
-# which is not available in Fedora yet
-%if 0%{?fedora} > 21
-%global  wayland 1
-%endif
 %endif
 
 Name:    kwin
 Version: 5.12.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -69,9 +63,9 @@ BuildRequires:  xcb-util-image-devel
 BuildRequires:  xcb-util-keysyms-devel
 BuildRequires:  xcb-util-cursor-devel
 BuildRequires:  libepoxy-devel
+BuildRequires:  libcap-devel
 
-# Wayland (optional)
-%if 0%{?wayland}
+# Wayland
 BuildRequires:  kf5-kwayland-devel
 BuildRequires:  libwayland-client-devel
 BuildRequires:  libwayland-server-devel
@@ -80,7 +74,6 @@ BuildRequires:  mesa-libwayland-egl-devel
 BuildRequires:  libxkbcommon-devel >= 0.4
 BuildRequires:  pkgconfig(libinput) >= 0.10
 BuildRequires:  pkgconfig(libudev)
-%endif
 
 # KF5
 BuildRequires:  kf5-kcompletion-devel
@@ -123,11 +116,13 @@ Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kdecoration%{?_isa} >= %{majmin_ver}
 Requires:       kscreenlocker%{?_isa} >= %{majmin_ver}
 
-# Runtime-only dependency for effect video playback
+# Runtime-only dependencies
 %if ! 0%{?bootstrap}
 BuildRequires:  qt5-qtmultimedia-devel
+BuildRequires:  qt5-qtvirtualkeyboard
 %endif
 Requires:       qt5-qtmultimedia%{?_isa}
+Recommends:     qt5-qtvirtualkeyboard%{?_isa}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
 
@@ -145,7 +140,6 @@ Provides: firstboot(windowmanager) = kwin
 %description
 %{summary}.
 
-%if 0%{?wayland}
 %package        wayland
 Summary:        KDE Window Manager with experimental Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -161,11 +155,11 @@ Requires:       xorg-x11-server-Xwayland
 %{?kf5_kinit_requires}
 %description    wayland
 %{summary}.
-%endif
 
 %package        common
 Summary:        Common files for KWin X11 and KWin Wayland
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       kf5-kwayland%{?_isa} >= %{_kf5_version}
 %description    common
 %{summary}.
 
@@ -211,13 +205,13 @@ pushd %{_target_platform}
   -DBUILD_TESTING:BOOL=%{?tests:ON}%{!?tests:OFF}
 popd
 
-make %{?_smp_mflags} -C %{_target_platform}
+%make_build -C %{_target_platform}
 
 
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
-%find_lang %{name} --with-html --with-qt --all-name
+%find_lang %{name} --with-html --all-name
 grep "%{_kf5_docdir}" %{name}.lang > %{name}-doc.lang
 cat %{name}.lang %{name}-doc.lang | sort | uniq -u > kwin5.lang
 
@@ -265,7 +259,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 # not config files themselves (so don't use %%config tag)
 %{_sysconfdir}/xdg/*.knsrc
 
-%if 0%{?wayland}
 %files wayland
 %{_kf5_bindir}/kwin_wayland
 %{_kf5_qtplugindir}/platforms/KWinQpaPlugin.so
@@ -276,10 +269,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandX11Backend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandVirtualBackend.so
 %{_kf5_plugindir}/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
-%endif
 
-%post libs -p /sbin/ldconfig
-%postun libs -p /sbin/ldconfig
+%ldconfig_scriptlets libs
 
 %files libs
 %{_sysconfdir}/xdg/org_kde_kwin.categories
@@ -304,6 +295,11 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Mar 15 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.12.3-2
+- -common: add versioned dep on kf5-kwayland (no longer optional)
+- use %%make_build %%ldconfig_scriptlets
+- BR: libcap-devel
+
 * Tue Mar 06 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.12.3-1
 - 5.12.3
 
