@@ -9,8 +9,8 @@
 %endif
 
 Name:    kwin
-Version: 5.12.3
-Release: 2%{?dist}
+Version: 5.12.4
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -295,6 +295,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Mar 27 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.12.4-1
+- 5.12.4
+
 * Thu Mar 15 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.12.3-2
 - -common: add versioned dep on kf5-kwayland (no longer optional)
 - use %%make_build %%ldconfig_scriptlets
