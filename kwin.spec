@@ -9,8 +9,8 @@
 %endif
 
 Name:    kwin
-Version: 5.13.3
-Release: 4%{?dist}
+Version: 5.13.4
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -295,6 +295,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Aug 02 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.13.4-1
+- 5.13.4
+
 * Fri Jul 20 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.13.3-4
 - use %%_qt5_qmldir (#1604528)
 
