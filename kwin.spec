@@ -10,7 +10,7 @@
 
 Name:    kwin
 Version: 5.13.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -295,6 +295,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Aug 24 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.13.4-2
+- rebuild
+
 * Thu Aug 02 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.13.4-1
 - 5.13.4
 
