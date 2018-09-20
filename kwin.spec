@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.13.5
+Version: 5.13.90
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -248,6 +248,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_libexecdir}/kwin_rules_dialog
 %{_libexecdir}/org_kde_kwin_xclipboard_syncer
 %{_datadir}/kwincompositing
+%{_datadir}/kconf_update/kwin.upd
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
@@ -295,6 +296,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Sep 14 2018 Martin Kyral <martin.kyral@gmail.com> - 5.13.90-1
+- 5.13.90
+
 * Tue Sep 04 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.13.5-1
 - 5.13.5
 
