@@ -9,8 +9,8 @@
 %endif
 
 Name:    kwin
-Version: 5.13.90
-Release: 2%{?dist}
+Version: 5.14.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -296,6 +296,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Oct 05 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.14.0-1
+- 5.14.0
+
 * Fri Sep 21 2018 Jan Grulich <jgrulich@redhat.com> - 5.13.90-2
 - rebuild (qt5)
 
