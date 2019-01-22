@@ -252,6 +252,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
+%{_kf5_datadir}/kpackage/kcms/kcm_kwin_virtualdesktops/*
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
 %{_kf5_datadir}/config.kcfg/kwin_colorcorrect.kcfg
@@ -280,6 +281,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_libdir}/libkwineffects.so.*
 %{_libdir}/libkwinglutils.so.*
 %{_libdir}/libkwin4_effect_builtins.so.*
+%{_libdir}/libkcmkwincommon.so.*
+%{_qt5_plugindir}/kcms/kcm_kwin_virtualdesktops.so
 
 %files devel
 %{_datadir}/dbus-1/interfaces/*.xml
@@ -291,7 +294,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_includedir}/kwin*.h
 
 %files doc -f %{name}-doc.lang
-%doc COMPLIANCE HACKING README
 %license COPYING*
 
 
