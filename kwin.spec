@@ -10,7 +10,7 @@
 
 Name:    kwin
 Version: 5.15.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -67,10 +67,7 @@ BuildRequires:  libcap-devel
 
 # Wayland
 BuildRequires:  kf5-kwayland-devel
-BuildRequires:  libwayland-client-devel
-BuildRequires:  libwayland-server-devel
-BuildRequires:  libwayland-cursor-devel
-BuildRequires:  mesa-libwayland-egl-devel
+BuildRequires:  wayland-devel
 BuildRequires:  libxkbcommon-devel >= 0.4
 BuildRequires:  pkgconfig(libinput) >= 0.10
 BuildRequires:  pkgconfig(libudev)
@@ -298,6 +295,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Feb 28 2019 Pete Walter <pwalter@fedoraproject.org> - 5.15.2-2
+- Update wayland deps
+
 * Tue Feb 26 2019 Rex Dieter <rdieter@fedoraproject.org> - 5.15.2-1
 - 5.15.2
 
