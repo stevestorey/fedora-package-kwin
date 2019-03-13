@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.15.3
+Version: 5.15.3.2
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -295,6 +295,10 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Wed Mar 13 2019 Martin Kyral <martin.kyral@gmail.com> - 5.15.3.2-1
+- 5.15.3.2
+- tarball respun to remove docs causing build issues with KDocTools < 5.57
+
 * Tue Mar 12 2019 Martin Kyral <martin.kyral@gmail.com> - 5.15.3-1
 - 5.15.3
 
