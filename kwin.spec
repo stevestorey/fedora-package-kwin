@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.15.5
+Version: 5.15.90
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -62,6 +62,7 @@ BuildRequires:  xcb-util-wm-devel
 BuildRequires:  xcb-util-image-devel
 BuildRequires:  xcb-util-keysyms-devel
 BuildRequires:  xcb-util-cursor-devel
+BuildRequires:  xcb-util-devel
 BuildRequires:  libepoxy-devel
 BuildRequires:  libcap-devel
 
@@ -235,6 +236,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_datadir}/kwin
 %{_kf5_qtplugindir}/*.so
 %{_kf5_qtplugindir}/kwin/
+%{_kf5_qtplugindir}/kcms/
+%{_kf5_qtplugindir}/kf5/
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
 %{_kf5_qtplugindir}/org.kde.kwin.platforms/
 %{_kf5_qtplugindir}/kpackage/packagestructure/kwin_packagestructure*.so
@@ -243,13 +246,12 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
 %{_libexecdir}/kwin_killer_helper
 %{_libexecdir}/kwin_rules_dialog
-%{_libexecdir}/org_kde_kwin_xclipboard_syncer
-%{_datadir}/kwincompositing
 %{_datadir}/kconf_update/kwin.upd
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
 %{_kf5_datadir}/kpackage/kcms/kcm_kwin_virtualdesktops/*
+%{_kf5_datadir}/kpackage/kcms/kcm_*
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
 %{_kf5_datadir}/config.kcfg/kwin_colorcorrect.kcfg
@@ -295,6 +297,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu May 16 2019 Martin Kyral <martin.kyral@gmail.com> - 5.15.90-1
+- 5.15.90
+
 * Thu May 09 2019 Martin Kyral <martin.kyral@gmail.com> - 5.15.5-1
 - 5.15.5
 
