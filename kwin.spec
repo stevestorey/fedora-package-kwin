@@ -9,8 +9,8 @@
 %endif
 
 Name:    kwin
-Version: 5.15.90
-Release: 2%{?dist}
+Version: 5.16.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -256,9 +256,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
 %{_kf5_datadir}/config.kcfg/kwin_colorcorrect.kcfg
 %{_datadir}/icons/hicolor/*/apps/kwin.*
-# note: these are for reference (to express config defaults), they are
-# not config files themselves (so don't use %%config tag)
-%{_sysconfdir}/xdg/*.knsrc
+%{_datadir}/knsrcfiles/*.knsrc
 
 %files wayland
 %{_kf5_bindir}/kwin_wayland
@@ -297,6 +295,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Jun 11 2019 Martin Kyral <martin.kyral@gmail.com> - 5.16.0-1
+- 5.16.0
+
 * Wed Jun 05 2019 Jan Grulich <jgrulich@redhat.com> - 5.15.90-2
 - rebuild (qt5)
 
