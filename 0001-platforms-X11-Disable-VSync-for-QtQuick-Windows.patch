@@ -1,0 +1,81 @@
+From 0124b1ef191fcafe0d0f89287be66b36833586e6 Mon Sep 17 00:00:00 2001
+From: Erik Kurzinger <ekurzinger@nvidia.com>
+Date: Wed, 19 Jun 2019 07:56:42 -0700
+Subject: [PATCH] [platforms/X11] Disable VSync for QtQuick Windows
+
+Summary:
+QtQuick windows created by KWin currently use the default swap interval
+of 1, meaning buffer swaps will block until vblank. However, this
+results in a problematic interaction on hybrid graphics systems running
+the proprietary NVIDIA driver.  VSync on such setups relies on a system
+called "PRIME synchronization", where the xf86-video-modesetting driver
+controlling the display will signal the NVIDIA driver when vblank has
+occurred. The issue is that it will only do so if there has been damage
+to the screen.
+
+So, when KWin creates a QtQuick window, compositing will stop waiting on
+the window to render, therefore no damage to the screen will occur. But
+this means that no vblank notifications will be delivered to the NVIDIA
+driver, so the glXSwapBuffers call by the QtQuick window will block
+perpetually. The end result is a freeze of the desktop.
+
+To get around this, we can simply disable vsync for QtQuick windows by
+setting the swap interval for the default QSurfaceFormat to 0. Since
+they are redirected, this shouldn't cause any tearing.
+
+BUG: 406180
+FIXED-IN: 5.16.2
+
+Test Plan:
+Using the proprietary NVIDIA driver on a hybrid graphics system, with
+PRIME synchronization enabled (see
+https://devtalk.nvidia.com/default/topic/957814/linux/prime-and-prime-synchronization/),
+perform any action causing a QtQuick window to be created by KWin, for
+example, triggering the application switcher dialogue with alt + tab.
+
+Ensure the desktop does not temporarily freeze.
+
+Note, this required a Qt build that includes commit
+https://code.qt.io/cgit/qt/qtbase.git/commit/?id=0c1831178540462da31fd7a4b6d2e446bc84498b
+resolving a bug that prevented the changing the swap interval.
+
+Reviewers: #kwin, davidedmundson, zzag
+
+Reviewed By: #kwin, davidedmundson, zzag
+
+Subscribers: zzag, romangg, alexeymin, kwin
+
+Tags: #kwin
+
+Differential Revision: https://phabricator.kde.org/D21808
+---
+ main_x11.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/main_x11.cpp b/main_x11.cpp
+index c83b8240b..1219337b6 100644
+--- a/main_x11.cpp
++++ b/main_x11.cpp
+@@ -43,6 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #include <QFile>
+ #include <QLabel>
+ #include <QPushButton>
++#include <QSurfaceFormat>
+ #include <QVBoxLayout>
+ #include <QX11Info>
+ 
+@@ -417,6 +418,11 @@ KWIN_EXPORT int kdemain(int argc, char * argv[])
+     KWin::Application::createAboutData();
+     KQuickAddons::QtQuickSettings::init();
+ 
++    // disables vsync for any QtQuick windows we create (BUG 406180)
++    QSurfaceFormat format = QSurfaceFormat::defaultFormat();
++    format.setSwapInterval(0);
++    QSurfaceFormat::setDefaultFormat(format);
++
+     QCommandLineOption replaceOption(QStringLiteral("replace"), i18n("Replace already-running ICCCM2.0-compliant window manager"));
+ 
+     QCommandLineParser parser;
+-- 
+2.21.0
+
