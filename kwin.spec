@@ -9,8 +9,8 @@
 %endif
 
 Name:    kwin
-Version: 5.16.1
-Release: 3%{?dist}
+Version: 5.16.2
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -31,7 +31,6 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch1: 0001-platforms-X11-Disable-VSync-for-QtQuick-Windows.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -296,6 +295,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Wed Jun 26 2019 Martin Kyral <martin.kyral@gmail.com> - 5.16.2-1
+- 5.16.2
+
 * Tue Jun 25 2019 Rex Dieter <rdieter@fedoraproject.org> - 5.16.1-3
 - rebuild (qt5)
 
