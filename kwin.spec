@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.16.5
+Version: 5.16.90
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -247,6 +247,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_libexecdir}/kwin_killer_helper
 %{_libexecdir}/kwin_rules_dialog
 %{_datadir}/kconf_update/kwin.upd
+%{_datadir}/kconf_update/kwin-5.16-auto-bordersize.sh
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
@@ -272,7 +273,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %ldconfig_scriptlets libs
 
 %files libs
-%{_sysconfdir}/xdg/org_kde_kwin.categories
+%{_kf5_datadir}/qlogging-categories5/org_kde_kwin.categories
 %{_libdir}/libkwin.so.*
 %{_libdir}/libkwinxrenderutils.so.*
 %{_libdir}/libkwineffects.so.*
@@ -295,6 +296,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Sep 20 2019 Martin Kyral <martin.kyral@gmail.com> - 5.16.90-1
+- 5.16.90
+
 * Fri Sep 06 2019 Martin Kyral <martin.kyral@gmail.com> - 5.16.5-1
 - 5.16.5
 
