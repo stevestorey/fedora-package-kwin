@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.17.4
+Version: 5.17.5
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -31,6 +31,7 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
+Patch0:  kwin-fix-decoration-texture-bleeding.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -296,6 +297,12 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Wed Jan 08 2020 Jan Grulich <jgrulich@redhat.com> - 5.17.5-1
+- 5.17.5
+
+* Fri Dec 06 2019 Jan Grulich <jgrulich@redhat.com> - 5.17.4-2
+- Fix decoration texture bleeding
+
 * Thu Dec 05 2019 Jan Grulich <jgrulich@redhat.com> - 5.17.4-1
 - 5.17.4
 
