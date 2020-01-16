@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.17.5
+Version: 5.17.90
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -297,11 +297,14 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Jan 16 2020 Jan Grulich <jgrulich@redhat.com> - 5.17.90-1
+- 5.17.90
+
 * Wed Jan 08 2020 Jan Grulich <jgrulich@redhat.com> - 5.17.5-1
 - 5.17.5
 
-* Fri Dec 06 2019 Jan Grulich <jgrulich@redhat.com> - 5.17.4-2
-- Fix decoration texture bleeding
+* Mon Dec 09 2019 Jan Grulich <jgrulich@redhat.com> - 5.17.4-2
+- rebuild (qt5)
 
 * Thu Dec 05 2019 Jan Grulich <jgrulich@redhat.com> - 5.17.4-1
 - 5.17.4
