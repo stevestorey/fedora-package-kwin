@@ -31,7 +31,6 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch0:  kwin-fix-decoration-texture-bleeding.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
