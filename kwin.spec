@@ -248,6 +248,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_libexecdir}/kwin_rules_dialog
 %{_datadir}/kconf_update/kwin.upd
 %{_datadir}/kconf_update/kwin-5.16-auto-bordersize.sh
+%{_datadir}/kconf_update/kwin-5.18-move-animspeed.py
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
@@ -255,6 +256,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_datadir}/kpackage/kcms/kcm_*
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
+%{_kf5_datadir}/config.kcfg/kwindecorationsettings.kcfg
+%{_kf5_datadir}/config.kcfg/virtualdesktopssettings.kcfg
 %{_kf5_datadir}/config.kcfg/kwin_colorcorrect.kcfg
 %{_datadir}/icons/hicolor/*/apps/kwin.*
 %{_datadir}/knsrcfiles/*.knsrc
