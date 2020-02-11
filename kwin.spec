@@ -9,8 +9,8 @@
 %endif
 
 Name:    kwin
-Version: 5.17.90
-Release: 2%{?dist}
+Version: 5.18.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -299,6 +299,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Feb 11 2020 Jan Grulich <jgrulich@redhat.com> - 5.18.0-1
+- 5.18.0
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.17.90-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
