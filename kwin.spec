@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.18.5
+Version: 5.18.90
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -299,6 +299,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri May 15 2020 Martin Kyral <martin.kyral@gmail.com> - 5.18.90-1
+- 5.18.90
+
 * Tue May 05 2020 Jan Grulich <jgrulich@redhat.com> - 5.18.5-1
 - 5.18.5
 
