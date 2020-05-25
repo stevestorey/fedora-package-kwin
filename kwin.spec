@@ -97,10 +97,12 @@ BuildRequires:  kf5-kdeclarative-devel
 BuildRequires:  kf5-kiconthemes-devel
 BuildRequires:  kf5-kidletime-devel
 BuildRequires:  kf5-ktextwidgets-devel
+BuildRequires:  kf5-kirigami2-devel
 
 BuildRequires:  kdecoration-devel >= %{majmin_ver}
 BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
 BuildRequires:  plasma-breeze-devel >= %{majmin_ver}
+BuildRequires:  kwayland-server-devel >= %{majmin_ver}
 
 %if 0%{?tests}
 BuildRequires: dbus-x11
@@ -229,10 +231,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %files
 %{_bindir}/kwin
 %{_bindir}/kwin_x11
-%{_kf5_libdir}/libkdeinit5_kwin_x11.so
 
 %files common -f kwin5.lang
-%{_kf5_libdir}/libkdeinit5_kwin_rules_dialog.so
 %{_datadir}/kwin
 %{_kf5_qtplugindir}/*.so
 %{_kf5_qtplugindir}/kwin/
