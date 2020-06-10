@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.18.90
+Version: 5.19.0
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -259,6 +259,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_datadir}/config.kcfg/kwindecorationsettings.kcfg
 %{_kf5_datadir}/config.kcfg/virtualdesktopssettings.kcfg
 %{_kf5_datadir}/config.kcfg/kwin_colorcorrect.kcfg
+%{_kf5_datadir}/kconf_update/kwinrules-5.19-placement.pl
+%{_kf5_datadir}/kconf_update/kwinrules.upd
 %{_datadir}/icons/hicolor/*/apps/kwin.*
 %{_datadir}/knsrcfiles/*.knsrc
 
@@ -299,6 +301,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Jun 9 2020 Martin Kyral <martin.kyral@gmail.com> - 5.19.0-1
+- 5.19.0
+
 * Fri May 15 2020 Martin Kyral <martin.kyral@gmail.com> - 5.18.90-1
 - 5.18.90
 
