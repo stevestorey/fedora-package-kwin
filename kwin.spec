@@ -31,6 +31,7 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
+Patch0:  kwin-s390x.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
