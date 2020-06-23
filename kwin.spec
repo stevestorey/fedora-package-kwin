@@ -9,7 +9,7 @@
 %endif
 
 Name:    kwin
-Version: 5.19.1
+Version: 5.19.2
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -31,7 +31,6 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch0:  kwin-s390x.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -302,6 +301,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Jun 23 2020 Jan Grulich <jgrulich@redhat.com> - 5.19.2-1
+- 5.19.2
+
 * Wed Jun 17 2020 Martin Kyral <martin.kyral@gmail.com> - 5.19.1-1
 - 5.19.1
 
