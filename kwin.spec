@@ -10,7 +10,7 @@
 
 Name:    kwin
 Version: 5.19.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -31,6 +31,7 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
+Patch0:  kwin-dont-perform-mouse-activate-raise-and-pass-click-for-topmost-windows.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -301,6 +302,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Jul 14 2020 Jan Grulich <jgrulich@redhat.com> - 5.19.3-2
+- Don't perform MouseActivateRaiseAndPassClick for topmost windows
+
 * Tue Jul 07 2020 Jan Grulich <jgrulich@redhat.com> - 5.19.3-1
 - 5.19.3
 

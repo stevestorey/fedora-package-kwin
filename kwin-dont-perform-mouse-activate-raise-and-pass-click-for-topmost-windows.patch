@@ -1,0 +1,67 @@
+diff --git a/abstract_client.cpp b/abstract_client.cpp
+index a5a6233239725c3c5e217af47c55760bf317ccfd..828319542fc36fd19f9e3f9c7a6297475372d9d9 100644
+--- a/abstract_client.cpp
++++ b/abstract_client.cpp
+@@ -382,6 +382,12 @@ void AbstractClient::autoRaise()
+     cancelAutoRaise();
+ }
+ 
++bool AbstractClient::isMostRecentlyRaised() const
++{
++    // The last toplevel in the unconstrained stacking order is the most recently raised one.
++    return workspace()->topClientOnDesktop(VirtualDesktopManager::self()->current(), -1, true, false) == this;
++}
++
+ bool AbstractClient::wantsTabFocus() const
+ {
+     return (isNormalWindow() || isDialog()) && wantsInput();
+@@ -1631,7 +1637,7 @@ Options::MouseCommand AbstractClient::getMouseCommand(Qt::MouseButton button, bo
+         return Options::MouseNothing;
+     }
+     if (isActive()) {
+-        if (options->isClickRaise()) {
++        if (options->isClickRaise() && !isMostRecentlyRaised()) {
+             *handled = true;
+             return Options::MouseActivateRaiseAndPassClick;
+         }
+diff --git a/abstract_client.h b/abstract_client.h
+index 6e619ca61f3f9c42c6b012ac48ccdf9f242fdd5c..f4a882bbbfe1c565c32c8672b44f073ea4449596 100644
+--- a/abstract_client.h
++++ b/abstract_client.h
+@@ -926,6 +926,7 @@ protected:
+     void setIcon(const QIcon &icon);
+     void startAutoRaise();
+     void autoRaise();
++    bool isMostRecentlyRaised() const;
+     /**
+      * Whether the window accepts focus.
+      * The difference to wantsInput is that the implementation should not check rules and return
+diff --git a/events.cpp b/events.cpp
+index d2d1962ae575c9a4d4729f4e87aba217ddd98e6e..b61016330b2dbfed4664309106acd203c6093412 100644
+--- a/events.cpp
++++ b/events.cpp
+@@ -853,12 +853,6 @@ void X11Client::grabButton(Qt::KeyboardModifier modifier, uint8_t button)
+ #undef XNumL
+ #undef XScrL
+ 
+-bool X11Client::isMostRecentlyRaised() const
+-{
+-    // The last toplevel in the unconstrained stacking order is the most recently raised one.
+-    return workspace()->topClientOnDesktop(VirtualDesktopManager::self()->current(), -1, true, false) == this;
+-}
+-
+ void X11Client::updateMouseGrab()
+ {
+     xcb_ungrab_button(connection(), XCB_BUTTON_INDEX_ANY, m_wrapper, XCB_MOD_MASK_ANY);
+diff --git a/x11client.h b/x11client.h
+index 454861a484a854b5f044b4cf8a3e6a287e47068f..2c51031b98629174cbc8e08231b1730d7f85647e 100644
+--- a/x11client.h
++++ b/x11client.h
+@@ -397,7 +397,6 @@ Q_SIGNALS:
+ private:
+     void exportMappingState(int s);   // ICCCM 4.1.3.1, 4.1.4, NETWM 2.5.1
+     bool isManaged() const; ///< Returns false if this client is not yet managed
+-    bool isMostRecentlyRaised() const;
+     void updateAllowedActions(bool force = false);
+     QRect fullscreenMonitorsArea(NETFullscreenMonitors topology) const;
+     void changeMaximize(bool horizontal, bool vertical, bool adjust) override;
