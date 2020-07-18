@@ -1,3 +1,4 @@
+%undefine __cmake_in_source_build
 # uncomment to enable bootstrap mode
 #global bootstrap 1
 
@@ -192,7 +193,7 @@ BuildArch:      noarch
 
 
 %prep
-%autosetup -n %{name}-%{version} -p1
+%autosetup -p1
 
 sed -i \
   -e 's|^find_package(Breeze ${PROJECT_VERSION} CONFIG)|find_package(Breeze 5.9 CONFIG)|' \
@@ -200,17 +201,13 @@ sed -i \
 
 
 %build
-mkdir %{_target_platform}
-pushd %{_target_platform}
-%{cmake_kf5} .. \
+%{cmake_kf5} \
   -DBUILD_TESTING:BOOL=%{?tests:ON}%{!?tests:OFF}
-popd
-
-%make_build -C %{_target_platform}
+%cmake_build
 
 
 %install
-make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
+%cmake_install
 
 %find_lang %{name} --with-html --all-name
 grep "%{_kf5_docdir}" %{name}.lang > %{name}-doc.lang
