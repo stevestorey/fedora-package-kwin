@@ -32,7 +32,6 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch0:  kwin-dont-perform-mouse-activate-raise-and-pass-click-for-topmost-windows.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
