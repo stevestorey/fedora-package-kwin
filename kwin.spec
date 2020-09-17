@@ -9,9 +9,12 @@
 %endif
 %endif
 
+# Control wayland by default
+%bcond_with wayland_default
+
 Name:    kwin
 Version: 5.19.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -36,6 +39,7 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 # Base
 BuildRequires:  extra-cmake-modules
 BuildRequires:  kf5-rpm-macros
+BuildRequires:  systemd-rpm-macros
 
 # Qt
 BuildRequires:  qt5-qtbase-devel
@@ -134,15 +138,25 @@ Obsoletes:      kwin-gles < 5
 Obsoletes:      kwin-gles-libs < 5
 
 # http://bugzilla.redhat.com/605675
-Provides: firstboot(windowmanager) = kwin_x11
-# and kwin too (#1197135), until initial-setup fixed
+# until initial-setup is fixed... (#1197135)
 Provides: firstboot(windowmanager) = kwin
+
+# Split of X11 variant into subpackage
+Obsoletes: kwin < 5.19.5-3
+
+%if ! %{with wayland_default}
+Recommends: %{name}-wayland = %{version}-%{release}
+Requires:   %{name}-x11 = %{version}-%{release}
+%else
+Requires:   %{name}-wayland = %{version}-%{release}
+Recommends: %{name}-x11 = %{version}-%{release}
+%endif
 
 %description
 %{summary}.
 
 %package        wayland
-Summary:        KDE Window Manager with experimental Wayland support
+Summary:        KDE Window Manager with Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
@@ -150,6 +164,8 @@ Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
 BuildRequires:  xorg-x11-server-Xwayland
 %endif
 Requires:       xorg-x11-server-Xwayland
+# http://bugzilla.redhat.com/605675
+Provides:       firstboot(windowmanager) = kwin_wayland
 # KWinQpaPlugin (and others?)
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # libkdeinit5_kwin*
@@ -157,10 +173,37 @@ Requires:       xorg-x11-server-Xwayland
 %description    wayland
 %{summary}.
 
+%package        wayland-nvidia
+Summary:        KDE Window Manager with Wayland support for NVIDIA driver
+Requires:       %{name}-wayland = %{version}-%{release}
+Supplements:    (%{name}-wayland and kmod-nvidia)
+BuildArch:      noarch
+%description    wayland-nvidia
+%{summary}.
+
+%package        x11
+Summary:        KDE Window Manager with X11 support
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
+%if ! 0%{?bootstrap}
+BuildRequires:  xorg-x11-server-Xorg
+%endif
+Requires:       xorg-x11-server-Xorg
+# http://bugzilla.redhat.com/605675
+Provides:       firstboot(windowmanager) = kwin_x11
+# KWinX11Platform (and others?)
+%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
+# libkdeinit5_kwin*
+%{?kf5_kinit_requires}
+%description    x11
+%{summary}.
+
 %package        common
 Summary:        Common files for KWin X11 and KWin Wayland
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       kf5-kwayland%{?_isa} >= %{_kf5_version}
+# Split of X11 variant into subpackage
+Obsoletes:      %{name}-common < 5.19.5-3
 %description    common
 %{summary}.
 
@@ -212,8 +255,17 @@ sed -i \
 grep "%{_kf5_docdir}" %{name}.lang > %{name}-doc.lang
 cat %{name}.lang %{name}-doc.lang | sort | uniq -u > kwin5.lang
 
+%if ! %{with wayland_default}
 # temporary(?) hack to allow initial-setup to use /usr/bin/kwin too
 ln -s kwin_x11 %{buildroot}%{_bindir}/kwin
+%else
+# temporary(?) hack to allow initial-setup to use /usr/bin/kwin too
+ln -s kwin_wayland %{buildroot}%{_bindir}/kwin
+%endif
+
+# install kwin-wayland-nvidia environment file
+mkdir -p %{buildroot}%{_environmentdir}
+echo "KWIN_DRM_USE_EGL_STREAMS=1" > %{buildroot}%{_environmentdir}/10-kwin-wayland-nvidia.conf
 
 
 %check
@@ -227,7 +279,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 %files
 %{_bindir}/kwin
-%{_bindir}/kwin_x11
 
 %files common -f kwin5.lang
 %{_datadir}/kwin
@@ -236,7 +287,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_qtplugindir}/kcms/
 %{_kf5_qtplugindir}/kf5/
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
-%{_kf5_qtplugindir}/org.kde.kwin.platforms/
+%dir %{_kf5_qtplugindir}/org.kde.kwin.platforms
 %{_kf5_qtplugindir}/kpackage/packagestructure/kwin_packagestructure*.so
 %{_kf5_qtplugindir}/org.kde.kwin.scenes/*.so
 %{_qt5_qmldir}/org/kde/kwin
@@ -272,6 +323,13 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandVirtualBackend.so
 %{_kf5_plugindir}/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
 
+%files wayland-nvidia
+%{_environmentdir}/10-kwin-wayland-nvidia.conf
+
+%files x11
+%{_kf5_bindir}/kwin_x11
+%{_kf5_qtplugindir}/org.kde.kwin.platforms/KWinX11Platform.so
+
 %ldconfig_scriptlets libs
 
 %files libs
@@ -298,6 +356,10 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Sep 17 2020 Neal Gompa <ngompa13@gmail.com> - 5.19.5-3
+- Split out X11 support and set up conditional for Wayland by default
+- Add kwin-wayland-nvidia package for NVIDIA driver configuration
+
 * Fri Sep 11 2020 Jan Grulich <jgrulich@redhat.com> - 5.19.5-2
 - rebuild (qt5)
 
