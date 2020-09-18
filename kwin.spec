@@ -51,6 +51,7 @@ BuildRequires:  qt5-qtscript-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qttools-static
 BuildRequires:  qt5-qtx11extras-devel
+BuildRequires:  qt5-qtwayland-devel
 
 # X11/OpenGL
 BuildRequires:  mesa-libGL-devel
@@ -71,9 +72,13 @@ BuildRequires:  xcb-util-devel
 BuildRequires:  libepoxy-devel
 BuildRequires:  libcap-devel
 
+BuildRequires:  glib2-devel
+BuildRequires:  pipewire-devel
+
 # Wayland
 BuildRequires:  kf5-kwayland-devel
 BuildRequires:  wayland-devel
+BuildRequires:  wayland-protocols-devel
 BuildRequires:  libxkbcommon-devel >= 0.4
 BuildRequires:  pkgconfig(libinput) >= 0.10
 BuildRequires:  pkgconfig(libudev)
