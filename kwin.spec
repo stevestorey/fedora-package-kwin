@@ -13,8 +13,8 @@
 %bcond_with wayland_default
 
 Name:    kwin
-Version: 5.19.5
-Release: 3%{?dist}
+Version: 5.19.90
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -356,6 +356,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Sep 18 2020 Jan Grulich <jgrulich@redhat.com> - 5.19.90-1
+- 5.19.90
+
 * Thu Sep 17 2020 Neal Gompa <ngompa13@gmail.com> - 5.19.5-3
 - Split out X11 support and set up conditional for Wayland by default
 - Add kwin-wayland-nvidia package for NVIDIA driver configuration
