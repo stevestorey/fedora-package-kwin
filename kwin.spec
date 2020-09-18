@@ -327,6 +327,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandX11Backend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandVirtualBackend.so
 %{_kf5_plugindir}/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
+%{_%_userunitdir}/plasma-kwin_wayland.service
 
 %files wayland-nvidia
 %{_environmentdir}/10-kwin-wayland-nvidia.conf
@@ -334,6 +335,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %files x11
 %{_kf5_bindir}/kwin_x11
 %{_kf5_qtplugindir}/org.kde.kwin.platforms/KWinX11Platform.so
+%{_%_userunitdir}/plasma-kwin_x11.service
 
 %ldconfig_scriptlets libs
 
