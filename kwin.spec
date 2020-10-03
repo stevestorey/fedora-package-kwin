@@ -10,11 +10,15 @@
 %endif
 
 # Control wayland by default
+%if (0%{?fedora} && 0%{?fedora} < 34) || (0%{?rhel} && 0%{?rhel} < 9)
 %bcond_with wayland_default
+%else
+%bcond_without wayland_default
+%endif
 
 Name:    kwin
 Version: 5.19.90
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -363,6 +367,10 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Sat Oct 03 2020 Neal Gompa <ngompa13@gmail.com> - 5.19.90-2
+- Use Wayland by default for F34+
+  https://fedoraproject.org/wiki/Changes/WaylandByDefaultForPlasma
+
 * Fri Sep 18 2020 Jan Grulich <jgrulich@redhat.com> - 5.19.90-1
 - 5.19.90
 
