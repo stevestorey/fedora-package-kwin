@@ -17,8 +17,8 @@
 %endif
 
 Name:    kwin
-Version: 5.19.90
-Release: 2%{?dist}
+Version: 5.20.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -367,6 +367,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Sun Oct 11 19:50:03 CEST 2020 Jan Grulich <jgrulich@redhat.com> - 5.20.0-1
+- 5.20.0
+
 * Sat Oct 03 2020 Neal Gompa <ngompa13@gmail.com> - 5.19.90-2
 - Use Wayland by default for F34+
   https://fedoraproject.org/wiki/Changes/WaylandByDefaultForPlasma
