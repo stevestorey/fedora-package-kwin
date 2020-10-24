@@ -1,10 +1,8 @@
-%undefine __cmake_in_source_build
 # uncomment to enable bootstrap mode
 #global bootstrap 1
-	
-	
+
 # Compat path macros
-%{!?_environmentdir: %global _environmentdir %{_prefix}/lib/environment.d}
+%{!?_environmentdir:%global _environmentdir %{_prefix}/lib/environment.d}
 
 %if !0%{?bootstrap}
 # avoid slow arm arch for now
