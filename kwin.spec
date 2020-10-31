@@ -1,9 +1,6 @@
 # uncomment to enable bootstrap mode
 #global bootstrap 1
 
-# Compat path macros
-%{!?_environmentdir:%global _environmentdir %{_prefix}/lib/environment.d}
-
 %if !0%{?bootstrap}
 # avoid slow arm arch for now
 %ifnarch %{arm}
@@ -20,7 +17,7 @@
 
 Name:    kwin
 Version: 5.20.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -181,15 +178,11 @@ Provides:       firstboot(windowmanager) = kwin_wayland
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 # libkdeinit5_kwin*
 %{?kf5_kinit_requires}
+# Obsolete kwin-wayland-nvidia package as this is now done automatically
+# by kwin-wayland
+Obsoletes:      %{name}-wayland-nvidia < 5.20.2-2
+Provides:       %{name}-wayland-nvidia = %{version}-%{release}
 %description    wayland
-%{summary}.
-
-%package        wayland-nvidia
-Summary:        KDE Window Manager with Wayland support for NVIDIA driver
-Requires:       %{name}-wayland = %{version}-%{release}
-Supplements:    (%{name}-wayland and kmod-nvidia)
-BuildArch:      noarch
-%description    wayland-nvidia
 %{summary}.
 
 %package        x11
@@ -274,10 +267,6 @@ ln -s kwin_x11 %{buildroot}%{_bindir}/kwin
 ln -s kwin_wayland %{buildroot}%{_bindir}/kwin
 %endif
 
-# install kwin-wayland-nvidia environment file
-mkdir -p %{buildroot}%{_environmentdir}
-echo "KWIN_DRM_USE_EGL_STREAMS=1" > %{buildroot}%{_environmentdir}/10-kwin-wayland-nvidia.conf
-
 
 %check
 %if 0%{?tests}
@@ -335,9 +324,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_plugindir}/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
 %{_userunitdir}/plasma-kwin_wayland.service
 
-%files wayland-nvidia
-%{_environmentdir}/10-kwin-wayland-nvidia.conf
-
 %files x11
 %{_kf5_bindir}/kwin_x11
 %{_kf5_qtplugindir}/org.kde.kwin.platforms/KWinX11Platform.so
@@ -369,6 +355,10 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Sat Oct 31 10:01:51 EDT 2020 Neal Gompa <ngompa13@gmail.com> - 5.20.2-2
+- Obsolete kwin-wayland-nvidia package by kwin-wayland since kwin now
+  automatically supports NVIDIA graphics correctly on Wayland
+
 * Tue Oct 27 14:23:03 CET 2020 Jan Grulich <jgrulich@redhat.com> - 5.20.2-1
 - 5.20.2
 
