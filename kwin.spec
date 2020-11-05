@@ -17,7 +17,7 @@
 
 Name:    kwin
 Version: 5.20.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -38,6 +38,7 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
+Patch0:  kwin-do-not-refresh-x11-clipboard-while-fetching.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -355,6 +356,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Nov  5 07:55:10 CET 2020 Jan Grulich <jgrulich@redhat.com> - 5.20.2-3
+- Backport upstream fix for clipboard issue
+
 * Sat Oct 31 10:01:51 EDT 2020 Neal Gompa <ngompa13@gmail.com> - 5.20.2-2
 - Obsolete kwin-wayland-nvidia package by kwin-wayland since kwin now
   automatically supports NVIDIA graphics correctly on Wayland
