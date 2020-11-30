@@ -17,7 +17,7 @@
 
 Name:    kwin
 Version: 5.20.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -39,6 +39,7 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 
 ## upstream patches
 Patch0:  kwin-do-not-refresh-x11-clipboard-while-fetching.patch
+Patch1:  kwin-fix-screensharing-for-xwayland-apps.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -356,6 +357,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Mon Nov 30 2020 Jan Grulich <jgrulich@redhat.com> - 5.20.3-3
+- Fix screensharing for xwayland apps
+
 * Mon Nov 23 07:53:19 CET 2020 Jan Grulich <jgrulich@redhat.com> - 5.20.3-2
 - rebuild (qt5)
 
