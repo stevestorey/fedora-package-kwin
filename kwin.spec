@@ -17,7 +17,7 @@
 
 Name:    kwin
 Version: 5.20.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -169,6 +169,7 @@ Summary:        KDE Window Manager with Wayland support
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 Requires:       kwayland-integration%{?_isa} >= %{majmin_ver}
+Requires:       kwayland-server%{?_isa} >= %{majmin_ver}
 %if ! 0%{?bootstrap}
 BuildRequires:  xorg-x11-server-Xwayland
 %endif
@@ -356,6 +357,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Jan 01 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.20.4-3
+- -wayland: add explicit versioned dep on kwayland-server
+
 * Thu Dec 10 10:57:46 CET 2020 Jan Grulich <jgrulich@redhat.com> - 5.20.4-2
 - Fix screensharing on Wayland with Chromium
 
