@@ -16,8 +16,8 @@
 %endif
 
 Name:    kwin
-Version: 5.20.4
-Release: 3%{?dist}
+Version: 5.15.5
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -38,7 +38,6 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch0:  kwin-fix-screensharing-with-chromium.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -357,6 +356,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Jan  5 15:52:04 CET 2021 Jan Grulich <jgrulich@redhat.com> - 5.15.5-1
+- 5.15.5
+
 * Fri Jan 01 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.20.4-3
 - -wayland: add explicit versioned dep on kwayland-server
 
