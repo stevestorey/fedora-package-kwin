@@ -16,7 +16,7 @@
 %endif
 
 Name:    kwin
-Version: 5.15.5
+Version: 5.20.5
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -356,8 +356,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
-* Tue Jan  5 15:52:04 CET 2021 Jan Grulich <jgrulich@redhat.com> - 5.15.5-1
-- 5.15.5
+* Tue Jan  5 16:03:31 CET 2021 Jan Grulich <jgrulich@redhat.com> - 5.20.5-1
+- 5.20.5
 
 * Fri Jan 01 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.20.4-3
 - -wayland: add explicit versioned dep on kwayland-server
