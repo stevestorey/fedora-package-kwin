@@ -40,6 +40,7 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 ## upstream patches
 
 # Base
+BuildRequires: make
 BuildRequires:  extra-cmake-modules
 BuildRequires:  kf5-rpm-macros
 BuildRequires:  systemd-rpm-macros
