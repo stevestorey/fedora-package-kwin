@@ -76,6 +76,7 @@ BuildRequires:  xcb-util-devel
 BuildRequires:  libepoxy-devel
 BuildRequires:  libcap-devel
 
+BuildRequires:  lcms2-devel
 BuildRequires:  glib2-devel
 BuildRequires:  pipewire-devel
 
@@ -112,6 +113,7 @@ BuildRequires:  kf5-kiconthemes-devel
 BuildRequires:  kf5-kidletime-devel
 BuildRequires:  kf5-ktextwidgets-devel
 BuildRequires:  kf5-kirigami2-devel
+BuildRequires:  kf5-krunner-devel
 
 BuildRequires:  kdecoration-devel >= %{majmin_ver}
 BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
@@ -287,7 +289,6 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_qtplugindir}/*.so
 %{_kf5_qtplugindir}/kwin/
 %{_kf5_qtplugindir}/kcms/
-%{_kf5_qtplugindir}/kf5/
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
 %dir %{_kf5_qtplugindir}/org.kde.kwin.platforms
 %{_kf5_qtplugindir}/kpackage/packagestructure/kwin_packagestructure*.so
@@ -299,10 +300,11 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_datadir}/kconf_update/kwin.upd
 %{_datadir}/kconf_update/kwin-5.16-auto-bordersize.sh
 %{_datadir}/kconf_update/kwin-5.18-move-animspeed.py
+%{_datadir}/kconf_update/kwin-5.21-desktop-grid-click-behavior.py
+%{_datadir}/kconf_update/kwin-5.21-no-swap-encourage.py
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
-%{_kf5_datadir}/kpackage/kcms/kcm_kwin_virtualdesktops/*
 %{_kf5_datadir}/kpackage/kcms/kcm_*
 %{_kf5_datadir}/knotifications5/kwin.notifyrc
 %{_kf5_datadir}/config.kcfg/kwin.kcfg
@@ -313,17 +315,16 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_datadir}/kconf_update/kwinrules.upd
 %{_datadir}/icons/hicolor/*/apps/kwin.*
 %{_datadir}/knsrcfiles/*.knsrc
+%{_datadir}/krunner/dbusplugins/kwin-runner-windows.desktop
 
 %files wayland
+%{_bindir}/kwin_wayland_wrapper
 %{_kf5_bindir}/kwin_wayland
-%{_kf5_qtplugindir}/platforms/KWinQpaPlugin.so
-%{_kf5_qtplugindir}/org.kde.kglobalaccel5.platforms/KF5GlobalAccelPrivateKWin.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandDrmBackend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandFbdevBackend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandWaylandBackend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandX11Backend.so
 %{_kf5_qtplugindir}/org.kde.kwin.waylandbackends/KWinWaylandVirtualBackend.so
-%{_kf5_plugindir}/org.kde.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
 %{_userunitdir}/plasma-kwin_wayland.service
 
 %files x11
@@ -346,6 +347,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %files devel
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/cmake/KWinDBusInterface
+%{_libdir}/cmake/KWinEffects
 %{_libdir}/libkwinxrenderutils.so
 %{_libdir}/libkwineffects.so
 %{_libdir}/libkwinglutils.so
