@@ -16,8 +16,8 @@
 %endif
 
 Name:    kwin
-Version: 5.20.90
-Release: 4%{?dist}
+Version: 5.21.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -37,12 +37,8 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch14: 0014-Fix-the-systemd-wayland-boot.patch
 
 ## proposed patches
-### From: https://invent.kde.org/plasma/kwin/-/merge_requests/665
-Patch51: 0001-xwayland-Generate-Xauthority-file.patch
-
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -364,6 +360,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Thu Feb 11 2021 Jan Grulich <jgrulich@redhat.com> - 5.21.0-1
+- 5.21.0
+
 * Mon Feb 08 2021 Neal Gompa <ngompa13@gmail.com> - 5.20.90-4
 - Add patch to ensure Xauthority file is generated for Wayland (rhbz#1921947)
 
