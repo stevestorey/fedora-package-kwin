@@ -17,7 +17,7 @@
 
 Name:    kwin
 Version: 5.21.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -360,6 +360,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Mon Feb 15 2021 Jan Grulich <jgrulich@redhat.com> - 5.21.0-2
+- Tarball respin
+
 * Thu Feb 11 2021 Jan Grulich <jgrulich@redhat.com> - 5.21.0-1
 - 5.21.0
 
