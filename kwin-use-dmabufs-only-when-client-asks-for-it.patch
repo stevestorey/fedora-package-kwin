@@ -5,13 +5,13 @@ Subject: [PATCH] Screencast: use dma-bufs only when client explicitly asks for
  it
 
 ---
- src/plugins/screencast/pipewirestream.cpp | 12 ++++++++++--
+ plugins/screencast/pipewirestream.cpp | 12 ++++++++++--
  1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/src/plugins/screencast/pipewirestream.cpp b/src/plugins/screencast/pipewirestream.cpp
+diff --git a/plugins/screencast/pipewirestream.cpp b/plugins/screencast/pipewirestream.cpp
 index 8f9ed30e0..1e86f8b81 100644
---- a/src/plugins/screencast/pipewirestream.cpp
-+++ b/src/plugins/screencast/pipewirestream.cpp
+--- a/plugins/screencast/pipewirestream.cpp
++++ b/plugins/screencast/pipewirestream.cpp
 @@ -106,13 +106,16 @@ void PipeWireStream::onStreamParamChanged(void *data, uint32_t id, const struct
 
  void PipeWireStream::onStreamAddBuffer(void *data, pw_buffer *buffer)
