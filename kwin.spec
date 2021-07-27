@@ -16,8 +16,8 @@
 %endif
 
 Name:    kwin
-Version: 5.22.3
-Release: 2%{?dist}
+Version: 5.22.4
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -361,6 +361,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Jul 27 2021 Jan Grulich <jgrulich@redhat.com> - 5.22.4-1
+- 5.22.4
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.22.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
