@@ -16,7 +16,7 @@
 %endif
 
 Name:    kwin
-Version: 5.22.4
+Version: 5.22.5
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -37,6 +37,7 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
+Patch0:  kwin-dma-buf.patch
 
 ## proposed patches
 
@@ -361,6 +362,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Aug 31 2021 Jan Grulich <jgrulich@redhat.com> - 5.22.5-1
+- 5.22.5
+
 * Tue Jul 27 2021 Jan Grulich <jgrulich@redhat.com> - 5.22.4-1
 - 5.22.4
 
