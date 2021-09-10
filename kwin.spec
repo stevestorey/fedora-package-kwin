@@ -39,6 +39,8 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 ## upstream patches
 
 ## proposed patches
+# https://invent.kde.org/plasma/kwin/-/merge_requests/1404
+Patch100: 0001-x11-Fix-build-with-EGL_NO_PLATFORM_SPECIFIC_TYPES.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -361,8 +363,8 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
-* Wed Sep 08 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.22.5-2
-- rebuild
+* Fri Sep 10 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.22.5-2
+- pull in proposed libglvnd-1.3.4 FTBFS fix (kde#440372, rh#2002431)
 
 * Tue Aug 31 2021 Jan Grulich <jgrulich@redhat.com> - 5.22.5-1
 - 5.22.5

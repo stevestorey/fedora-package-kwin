@@ -1,0 +1,30 @@
+From b6b310d0168b210d0dd3b3703d570b5f8b3d1dfb Mon Sep 17 00:00:00 2001
+From: Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+Date: Fri, 10 Sep 2021 13:36:04 +0300
+Subject: [PATCH] x11: Fix build with EGL_NO_PLATFORM_SPECIFIC_TYPES
+
+eglCreateWindowSurface() wants a Window/xcb_window_t, but with
+EGL_NO_PLATFORM_SPECIFIC_TYPES, EGLNativeWindowType is defined as an
+opaque pointer, i.e. void*.
+
+BUG: 440372
+---
+ src/plugins/platforms/x11/common/eglonxbackend.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/plugins/platforms/x11/common/eglonxbackend.cpp b/src/plugins/platforms/x11/common/eglonxbackend.cpp
+index c62ec170d..da4c27c8e 100644
+--- a/src/plugins/platforms/x11/common/eglonxbackend.cpp
++++ b/src/plugins/platforms/x11/common/eglonxbackend.cpp
+@@ -221,7 +221,7 @@ EGLSurface EglOnXBackend::createSurface(xcb_window_t window)
+         //       cannot be an xcb_window_t.
+         surface = eglCreatePlatformWindowSurfaceEXT(eglDisplay(), config(), (void *) &window, nullptr);
+     } else {
+-        surface = eglCreateWindowSurface(eglDisplay(), config(), window, nullptr);
++        surface = eglCreateWindowSurface(eglDisplay(), config(), reinterpret_cast<EGLNativeWindowType>(window), nullptr);
+     }
+ 
+     return surface;
+-- 
+2.31.1
+
