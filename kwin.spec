@@ -16,8 +16,8 @@
 %endif
 
 Name:    kwin
-Version: 5.22.5
-Release: 2%{?dist}
+Version: 5.22.90
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -363,6 +363,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Sep 17 2021 Marc Deop <marcdeop@fedoraproject.org> - 5.22.90-1
+- 5.22.90
+
 * Fri Sep 10 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.22.5-2
 - pull in proposed libglvnd-1.3.4 FTBFS fix (kde#440372, rh#2002431)
 
