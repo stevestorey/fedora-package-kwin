@@ -17,7 +17,7 @@
 
 Name:    kwin
 Version: 5.22.90
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -39,8 +39,6 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 ## upstream patches
 
 ## proposed patches
-# https://invent.kde.org/plasma/kwin/-/merge_requests/1404
-Patch100: 0001-x11-Fix-build-with-EGL_NO_PLATFORM_SPECIFIC_TYPES.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -120,6 +118,7 @@ BuildRequires:  kf5-krunner-devel
 BuildRequires:  kdecoration-devel >= %{majmin_ver}
 BuildRequires:  kscreenlocker-devel >= %{majmin_ver}
 BuildRequires:  plasma-breeze-devel >= %{majmin_ver}
+BuildRequires:  plasma-wayland-protocols-devel
 BuildRequires:  kwayland-server-devel >= %{majmin_ver}
 
 %if 0%{?tests}
@@ -292,9 +291,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_kf5_qtplugindir}/*.so
 %{_kf5_qtplugindir}/kwin/
 %{_kf5_qtplugindir}/kcms/
+%{_kf5_qtplugindir}/kpackage/packagestructure/
 %{_kf5_qtplugindir}/org.kde.kdecoration2/*.so
 %dir %{_kf5_qtplugindir}/org.kde.kwin.platforms
-%{_kf5_qtplugindir}/kpackage/packagestructure/kwin_packagestructure*.so
 %{_kf5_qtplugindir}/org.kde.kwin.scenes/*.so
 %{_qt5_qmldir}/org/kde/kwin
 %{_kf5_libdir}/kconf_update_bin/kwin5_update_default_rules
@@ -306,6 +305,12 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_datadir}/kconf_update/kwin-5.18-move-animspeed.py
 %{_datadir}/kconf_update/kwin-5.21-desktop-grid-click-behavior.py
 %{_datadir}/kconf_update/kwin-5.21-no-swap-encourage.py
+%{_datadir}/kconf_update/kwin-5.23-disable-translucency-effect.sh
+%{_datadir}/kconf_update/kwin-5.23-remove-cover-switch.py
+%{_datadir}/kconf_update/kwin-5.23-remove-cubeslide.py
+%{_datadir}/kconf_update/kwin-5.23-remove-flip-switch.py
+%{_datadir}/kconf_update/kwin-5.23-remove-xrender-backend.py
+%{_datadir}/kconf_update/kwinrules-5.23-virtual-desktop-ids.py
 %{_kf5_datadir}/kservices5/*.desktop
 %{_kf5_datadir}/kservices5/kwin
 %{_kf5_datadir}/kservicetypes5/*.desktop
@@ -363,6 +368,11 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Sun Sep 19 2021 Marc Deop <marcdeop@fedoraproject.org> - 5.22.90-2
+- Remove patch already applied upstream
+- Add BuildRequires plasma-wayland-protocols-devel
+- Adjust files section
+
 * Fri Sep 17 2021 Marc Deop <marcdeop@fedoraproject.org> - 5.22.90-1
 - 5.22.90
 
