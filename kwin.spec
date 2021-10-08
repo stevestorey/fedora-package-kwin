@@ -16,8 +16,8 @@
 %endif
 
 Name:    kwin
-Version: 5.22.90
-Release: 2%{?dist}
+Version: 5.23.0
+Release: 1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -37,6 +37,8 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
+Patch101:       f18bf757928ec41e0300d61d17a68c7d9033816e.patch
+Patch102:       6e3c3936dc3924105c49f8e0b41bf789883d173b.patch
 
 ## proposed patches
 
@@ -368,6 +370,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Fri Oct 08 2021 Marc Deop <marcdeop@fedoraproject.org> - 5.23.0-1
+- 5.23.0
+
 * Sun Sep 19 2021 Marc Deop <marcdeop@fedoraproject.org> - 5.22.90-2
 - Remove patch already applied upstream
 - Add BuildRequires plasma-wayland-protocols-devel
