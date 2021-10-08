@@ -37,8 +37,6 @@ URL:     https://userbase.kde.org/KWin
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 
 ## upstream patches
-Patch101:       f18bf757928ec41e0300d61d17a68c7d9033816e.patch
-Patch102:       6e3c3936dc3924105c49f8e0b41bf789883d173b.patch
 
 ## proposed patches
 
