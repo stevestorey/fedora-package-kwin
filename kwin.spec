@@ -16,7 +16,7 @@
 %endif
 
 Name:    kwin
-Version: 5.23.1
+Version: 5.23.2
 Release: 1%{?dist}
 Summary: KDE Window manager
 
@@ -368,6 +368,9 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Tue Oct 26 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.23.2-1
+- 5.23.2
+
 * Sat Oct 23 2021 Marc Deop <marcdeop@fedoraproject.org> - 5.23.1-1
 - 5.23.1
 
