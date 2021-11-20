@@ -17,7 +17,7 @@
 
 Name:    kwin
 Version: 5.23.3
-Release: 1%{?dist}
+Release: 1.1%{?dist}
 Summary: KDE Window manager
 
 # all sources are effectively GPLv2+, except for:
@@ -39,6 +39,10 @@ Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.
 ## upstream patches
 
 ## proposed patches
+
+## downstream patches
+
+Patch100:       kwin-5.23.3-cover-and-flow-switch.patch
 
 # Base
 BuildRequires:  extra-cmake-modules
@@ -306,9 +310,7 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 %{_datadir}/kconf_update/kwin-5.21-desktop-grid-click-behavior.py
 %{_datadir}/kconf_update/kwin-5.21-no-swap-encourage.py
 %{_datadir}/kconf_update/kwin-5.23-disable-translucency-effect.sh
-%{_datadir}/kconf_update/kwin-5.23-remove-cover-switch.py
 %{_datadir}/kconf_update/kwin-5.23-remove-cubeslide.py
-%{_datadir}/kconf_update/kwin-5.23-remove-flip-switch.py
 %{_datadir}/kconf_update/kwin-5.23-remove-xrender-backend.py
 %{_datadir}/kconf_update/kwinrules-5.23-virtual-desktop-ids.py
 %{_kf5_datadir}/kservices5/*.desktop
@@ -368,6 +370,10 @@ make test ARGS="--output-on-failure --timeout 10" -C %{_target_platform} ||:
 
 
 %changelog
+* Sat Nov 20 2021 Steve Storey <sstorey@gmail.com> - 5.23.3-1.1
+- Reinstate the coverswitch built-in effect
+- Reinstate the flowswitch effect
+
 * Wed Nov 10 2021 Rex Dieter <rdieter@fedoraproject.org> - 5.23.3-1
 - 5.23.3
 
